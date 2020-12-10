@@ -1,10 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
-import VoiceChatComponent from './chat-view/voice-chat.component';
+import "./App.css";
+import MeetingPage from "./meetings-page/meeting-page.component";
+
 function App() {
   return (
     <div className="App">
-      <VoiceChatComponent />
+      <MeetingPage />
     </div>
   );
 }
