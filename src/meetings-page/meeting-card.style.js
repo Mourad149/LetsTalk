@@ -38,6 +38,7 @@ const useStyles = makeStyles({
     margin: "0px",
     textAlign: "end",
     padding: "8px",
+    fontSize: "12px",
   },
   joinBox: {
     gridArea: "joinBox",
