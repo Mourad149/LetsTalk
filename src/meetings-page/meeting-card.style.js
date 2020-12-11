@@ -48,7 +48,10 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: "linear-gradient(-120deg, rgba(0,0,0,0.7), rgba(0,0,0,0.9))",
+    background: "black",
+    "&:hover, &:focus": {
+      backgroundColor: "grey",
+    },
   },
   icon: {
     margin: "2px",

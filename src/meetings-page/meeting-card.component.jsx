@@ -2,7 +2,6 @@ import React from "react";
 import useStyles from "./meeting-card.style";
 import PeopleIcon from "@material-ui/icons/People";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 
 const MeetingCard = (props) => {
   const classes = useStyles();
