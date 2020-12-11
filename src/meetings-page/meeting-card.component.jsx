@@ -2,6 +2,7 @@ import React from "react";
 import useStyles from "./meeting-card.style";
 import PeopleIcon from "@material-ui/icons/People";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { Link } from "react-router-dom";
 
 const MeetingCard = (props) => {
   const classes = useStyles();
@@ -16,9 +17,9 @@ const MeetingCard = (props) => {
       <p className={classes.startBox}>
         Starts {props.startDate} at {props.startTime}
       </p>
-      <div className={classes.joinBox}>
+      <Link to="/meetings/1" className={classes.joinBox}>
         <ArrowForwardIosIcon />
-      </div>
+      </Link>
     </div>
   );
 };
