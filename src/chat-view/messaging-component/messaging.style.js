@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 const messageMinWidth = '6rem';
 const messageMaxWidth = '20rem';
-const messageWidth = '18rem';
+const messageWidth = '10rem';
 const messageMinHeight = '2.5rem';
 const avatarWidth = '2rem';
 const avatarHeight = '2rem';
@@ -22,12 +22,14 @@ const useStyles = makeStyles({
 
     margin: '20px',
     position: 'relative',
+    marginLeft: '0',
+    marginRight: 'auto',
   },
   messageRightContainer: {
     display: 'flex',
     maxWidth: messageMaxWidth,
     minWidth: messageMinWidth,
-    width: messageWidth,
+    width: '17rem',
     minHeight: messageMinHeight,
     background: 'linear-gradient(-45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.9))',
     borderRadius: '18px 0px 18px 18px',
@@ -36,6 +38,8 @@ const useStyles = makeStyles({
 
     margin: '20px',
     position: 'relative',
+    marginLeft: 'auto',
+    marginRight: '0px',
   },
   messageAvatarRight: {
     width: avatarWidth,
@@ -57,7 +61,7 @@ const useStyles = makeStyles({
   },
   message: {
     display: 'flex',
-    maxWidth: '25rem',
+    width: '100%',
   },
   messagingViewContainer: {
     height: '100%',
@@ -65,14 +69,14 @@ const useStyles = makeStyles({
     flexDirection: 'column',
   },
   messages: {
-    width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     height: `calc(100% - ${messageHeaderHeight} - ${messageFiledContainerHeight})`,
     maxHeight: `calc(100% - ${messageHeaderHeight} - ${messageFiledContainerHeight})`,
     minHeight: `calc(100% - ${messageHeaderHeight} - ${messageFiledContainerHeight})`,
     overflowY: 'scroll',
+
+    padding: '0 20px 0 20px',
   },
   messagingHeaderContainer: {
     display: 'flex',
