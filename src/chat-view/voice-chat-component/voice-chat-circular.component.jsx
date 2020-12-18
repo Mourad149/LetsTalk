@@ -1,20 +1,10 @@
 import React from 'react';
 import VoiceChatAvatarComponent from './voice-chat-avatar.component';
 import useStyles from './voice-chat.style';
+import { Avatar } from '@material-ui/core';
 function VoiceChatCircularComponent() {
   const classes = useStyles();
   var list = [
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
-    <VoiceChatAvatarComponent />,
     <VoiceChatAvatarComponent />,
     <VoiceChatAvatarComponent />,
     <VoiceChatAvatarComponent />,
@@ -38,19 +28,21 @@ function VoiceChatCircularComponent() {
       }}
     >
       <ul className={classes.list}>
+        <Avatar className={classes.organizerAvatar} />
         {list.map((item, index) => {
           var offsetAngle = 360 / list.length;
           var rotateAngle = offsetAngle * index;
 
           return (
             <VoiceChatAvatarComponent
-              styleProps={{
-                transform: `rotate(${rotateAngle}deg) translate(0,-200px) rotate(-${rotateAngle}deg)`,
-                listStyle: 'none',
-
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
+              props={{
+                styles: {
+                  transform: `rotate(${rotateAngle}deg) translate(0,-200px) rotate(-${rotateAngle}deg)`,
+                  listStyle: 'none',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                },
               }}
               key={index}
             />

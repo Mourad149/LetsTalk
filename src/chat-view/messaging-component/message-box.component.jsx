@@ -14,7 +14,7 @@ function MessageBoxComponent(props) {
     >
       <MessageAvatarComponent currentUser={props.currentUser} />
       <Typography className={classes.textMessage}>
-        Dwzt 2 entretiens mea whd charika mqwda bzf f Franca
+        Ici s'affichereont les messages ecrit dans le chat :)
       </Typography>
     </div>
   );

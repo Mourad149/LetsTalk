@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-
+const organizerAvatarWidth = '5rem';
+const organizerAvatarHeight = '5rem';
+const participantAvatarWidth = '2.3rem';
+const participantAvatarHeight = '2.3rem';
 const useStyles = makeStyles({
   voiceChatContainer: {
     width: '100%',
@@ -42,8 +45,19 @@ const useStyles = makeStyles({
     listStyle: 'none',
 
     position: 'absolute',
-    top: '50%',
-    left: '50%',
+    top: `50%`,
+    left: `50%`,
+  },
+  organizerAvatar: {
+    width: organizerAvatarWidth,
+    height: organizerAvatarHeight,
+    marginLeft: participantAvatarWidth,
+    marginRight: participantAvatarWidth,
+    marginTop: participantAvatarHeight,
+  },
+  participantsAvatar: {
+    width: participantAvatarWidth,
+    height: participantAvatarHeight,
   },
 });
 
