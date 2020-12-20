@@ -1,12 +1,14 @@
 import React from 'react';
 import { Avatar } from '@material-ui/core';
 import useStyles from './voice-chat.style';
+import { useSpring, animated } from 'react-spring';
 function VoiceChatAvatarComponent(props) {
   const classes = useStyles();
+
   return (
-    <li style={props.props.styles}>
+    <animated.li style={props.props.styles}>
       <Avatar className={classes.participantsAvatar} />
-    </li>
+    </animated.li>
   );
 }
 export default VoiceChatAvatarComponent;

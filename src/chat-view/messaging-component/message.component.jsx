@@ -6,7 +6,12 @@ function MessageComponent(props) {
   const classes = useStyles();
   return (
     <div className={classes.message}>
-      <MessageBoxComponent currentUser={props.currentUser} />
+      <MessageBoxComponent
+        admin={props.admin}
+        hasRaisedHandComponent={props.hasRaisedHandComponent}
+        currentUser={props.currentUser}
+        message={props.message}
+      />
     </div>
   );
 }
