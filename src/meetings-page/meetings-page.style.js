@@ -1,6 +1,10 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  meetingsPage: {
+    display: "flex",
+    flexDirection: "row",
+  },
+});
 
 export default useStyles;
