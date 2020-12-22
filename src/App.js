@@ -1,19 +1,17 @@
-import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import logo from './logo.svg';
+import MessageBoxComponent from './chat-view/messaging-component/message-box.component';
+import MessageComponent from './chat-view/messaging-component/message.component';
+import MessagingComponent from './chat-view/messaging-component/messaging.component';
+import ChatViewComponent from './chat-view/chat-view.component';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import MeetingPage from "./meetings-page/meeting-page.component";
-
+import RoutesComponent from './routes.component';
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/meetings" component={MeetingPage} />
-        <Route
-          exact
-          path="/meetings/1"
-          render={() => <div>A specific meeting</div>}
-        />
-      </Switch>
+    <div style={{ height: '100vh' }}>
+      <Router>
+        <RoutesComponent />
+      </Router>
     </div>
   );
 }
