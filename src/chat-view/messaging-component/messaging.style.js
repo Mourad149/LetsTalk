@@ -16,14 +16,14 @@ const useStyles = makeStyles({
     minHeight: messageMinHeight,
     background: 'linear-gradient(-45deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7))',
     borderRadius: '0px 18px 18px 18px',
-    boxShadow:
-      '8px 8px 12px 0 rgba(0, 0, 0, 0.25), -4px -4px 8px 0 rgba(255, 255, 255, 0.3)',
 
     margin: '20px',
     position: 'relative',
     marginLeft: '0',
     marginRight: 'auto',
     flexDirection: 'column',
+    boxShadow:
+      '-8px 8px 12px 0 rgba(0, 0, 0, 0.25), 4px 4px 8px 0 rgba(255, 255, 255, 0.3)',
   },
   messageRightContainer: {
     display: 'flex',
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     background: 'linear-gradient(-45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.9))',
     borderRadius: '18px 0px 18px 18px',
     boxShadow:
-      '-8px 8px 12px 0 rgba(0, 0, 0, 0.25), 4px 4px 8px 0 rgba(255, 255, 255, 0.3)',
+      '8px 8px 12px 0 rgba(0, 0, 0, 0.25), -4px -4px 8px 0 rgba(255, 255, 255, 0.3)',
 
     margin: '20px',
     position: 'relative',

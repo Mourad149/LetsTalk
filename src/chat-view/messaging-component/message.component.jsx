@@ -11,6 +11,7 @@ function MessageComponent(props) {
         hasRaisedHandComponent={props.hasRaisedHandComponent}
         currentUser={props.currentUser}
         message={props.message}
+        userRole={props.userRole}
       />
     </div>
   );

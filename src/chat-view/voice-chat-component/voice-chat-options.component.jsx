@@ -3,10 +3,26 @@ import { IconButton } from '@material-ui/core';
 import MicNoneIcon from '@material-ui/icons/MicNone';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import CallEndIcon from '@material-ui/icons/CallEnd';
+import io from 'socket.io-client';
 import useStyles from './voice-chat.style';
+let socket = io('http://localhost:5000/messaging');
+
 var classNames = require('classnames');
-function VoiceChatOptionsComponent() {
+function VoiceChatOptionsComponent(props) {
   const classes = useStyles();
+  const [userId, setUserId] = React.useState(props.userId);
+  const [userRole, setUserRole] = React.useState(props.userRole);
+
+  React.useEffect(() => {
+    socket.emit('join', { room: props.room });
+  }, []);
+  const raiseHand = () => {
+    socket.emit('handRaised', {
+      handRaiser: userId,
+      userRole: userRole,
+      senderId: userId,
+    });
+  };
   return (
     <div className={classes.voiceOptionsContainer}>
       <IconButton className={classNames(classes.options, classes.micIcon)}>
@@ -15,7 +31,10 @@ function VoiceChatOptionsComponent() {
       <IconButton className={classNames(classes.options, classes.endCallIcon)}>
         <CallEndIcon />
       </IconButton>
-      <IconButton className={classNames(classes.options, classes.handIcon)}>
+      <IconButton
+        className={classNames(classes.options, classes.handIcon)}
+        onClick={() => raiseHand()}
+      >
         <PanToolIcon />
       </IconButton>
     </div>

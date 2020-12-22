@@ -2,6 +2,9 @@ import React from 'react';
 import VoiceChatAvatarComponent from './voice-chat-avatar.component';
 import useStyles from './voice-chat.style';
 import { Avatar } from '@material-ui/core';
+import io from 'socket.io-client';
+let socket = io('http://localhost:5000/messaging');
+
 function VoiceChatCircularComponent() {
   const classes = useStyles();
   var list = [

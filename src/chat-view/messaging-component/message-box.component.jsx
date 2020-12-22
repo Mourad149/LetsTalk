@@ -11,29 +11,31 @@ function MessageBoxComponent(props) {
     <div
       className={
         props.currentUser
-          ? classes.messageLeftContainer
-          : classes.messageRightContainer
+          ? classes.messageRightContainer
+          : classes.messageLeftContainer
       }
     >
       <MessageAvatarComponent currentUser={props.currentUser} />
       <Typography
-        align={props.currentUser ? 'left' : 'right'}
+        align={props.currentUser ? 'right' : 'left'}
         className={
           props.currentUser
-            ? classes.userNameLeftStyle
-            : classes.userNameRightStyle
+            ? classes.userNameRightStyle
+            : classes.userNameLeftStyle
         }
       >
         Mourad Zinbi
       </Typography>
-      {props.admin && props.hasRaisedHandComponent ? (
+      {props.hasRaisedHandComponent ? (
         [
           <Typography key={1} className={classes.textMessage}>
             <PanToolIcon fontSize="small" className={classes.hasRaisedIcon} />{' '}
-            User asked for permission to speak
+            {props.message}
           </Typography>,
 
-          <HasRaisedHandComponent key={2} />,
+          props.userRole === 'admin' ? (
+            <HasRaisedHandComponent key={2} />
+          ) : null,
         ]
       ) : (
         <Typography className={classes.textMessage}>{props.message}</Typography>

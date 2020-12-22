@@ -7,8 +7,8 @@ function MessageAvatarComponent(props) {
     <Avatar
       className={
         props.currentUser
-          ? classes.messageAvatarLeft
-          : classes.messageAvatarRight
+          ? classes.messageAvatarRight
+          : classes.messageAvatarLeft
       }
     />
   );
