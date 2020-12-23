@@ -70,7 +70,7 @@ const MeetingsList = (props) => {
 
   return (
     <div className={classes.meetingsList}>
-      <h5>Available meetings</h5>
+      <h5 style={{ textAlign: "center" }}>Available meetings</h5>
       <SearchBar
         value={searchState.searchInput}
         onChange={(event) => onSearchHandler(event)}
