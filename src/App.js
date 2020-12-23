@@ -1,3 +1,7 @@
+
+import "./App.css";
+import MeetingPage from "./meetings-page/meeting-page.component";
+import SignUpPage from "./sign-up/sign-up-page.component";
 import logo from './logo.svg';
 import MessageBoxComponent from './chat-view/messaging-component/message-box.component';
 import MessageComponent from './chat-view/messaging-component/message.component';
@@ -5,9 +9,11 @@ import MessagingComponent from './chat-view/messaging-component/messaging.compon
 import ChatViewComponent from './chat-view/chat-view.component';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+
 import RoutesComponent from './routes.component';
 function App() {
   return (
+
     <div style={{ height: '100vh' }}>
       <Router>
         <RoutesComponent />
