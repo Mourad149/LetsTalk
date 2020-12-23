@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import useStyles from "./meetings-list.style";
 import MeetingCard from "./meeting-card.component";
+import SearchBar from "./meeting-search.component";
 
 const MeetingsList = (props) => {
   const classes = useStyles();
@@ -33,7 +34,27 @@ const MeetingsList = (props) => {
     },
   ]);
 
-  const meetings = meetingsState.map((meeting) => (
+  const [searchState, setSearchState] = useState({ searchInput: "" });
+  const [filteredMeetings, setFilteredMeetings] = useState([]);
+
+  const onSearchHandler = (event) => {
+    setSearchState({ searchInput: event.target.value });
+    filterMeetings(event.target.value);
+  };
+
+  const filterMeetings = (val) => {
+    const filteredMeetings = meetingsState.filter((meeting) =>
+      meeting.theme.startsWith(val)
+    );
+    setFilteredMeetings([...filteredMeetings]);
+  };
+
+  let usedState = meetingsState;
+  if (searchState.searchInput !== "") {
+    usedState = filteredMeetings;
+  }
+
+  let meetings = usedState.map((meeting) => (
     <MeetingCard
       key={meeting.id}
       theme={meeting.theme}
@@ -43,9 +64,17 @@ const MeetingsList = (props) => {
       startDate={meeting.startDate}
     />
   ));
+  if (usedState.length === 0) {
+    meetings = <h1>Not Available</h1>;
+  }
+
   return (
     <div className={classes.meetingsList}>
       <h5>Available meetings</h5>
+      <SearchBar
+        value={searchState.searchInput}
+        onChange={(event) => onSearchHandler(event)}
+      />
       {meetings}
     </div>
   );
