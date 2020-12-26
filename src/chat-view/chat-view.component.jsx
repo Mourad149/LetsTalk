@@ -5,7 +5,6 @@ import useStyles from './chat-view.style';
 import VoiceChatComponent from './voice-chat-component/voice-chat.component';
 import { v4 as uuidv4 } from 'uuid';
 import io from 'socket.io-client';
-let socket = io('http://localhost:5000/messaging');
 
 function ChatViewComponent(props) {
   const classes = useStyles();
