@@ -9,10 +9,14 @@ const ProfileCard = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.profileCard}>
-      <h5>Your profile</h5>
+      <h5 style={{ textAlign: "center" }}>Your profile</h5>
       <Avatar className={classes.avatar} />
-      <p className={classes.name}>Zakaria Azziz</p>
-      <p className={classes.pseudo}>TheRedHacker</p>
+      <p className={classes.name} style={{ textAlign: "center" }}>
+        Zakaria Azziz
+      </p>
+      <p className={classes.pseudo} style={{ textAlign: "center" }}>
+        TheRedHacker
+      </p>
       <p className={classes.description}>
         Actuellement étudiant en 3ème année à l’Ecole Nationale Supérieur
         d’Informatique et d’Analyse des Systèmes
