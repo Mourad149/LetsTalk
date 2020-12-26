@@ -5,7 +5,14 @@ import PanToolIcon from '@material-ui/icons/PanTool';
 import CallEndIcon from '@material-ui/icons/CallEnd';
 import io from 'socket.io-client';
 import useStyles from './voice-chat.style';
-let socket = io('http://localhost:5000/messaging');
+import dotenv from 'dotenv';
+let socket = io.connect(
+  `https://${process.env.REACT_APP_BASE_URL}:5000/messaging`,
+  {
+    secure: true,
+    rejectUnauthorized: false,
+  }
+);
 
 var classNames = require('classnames');
 function VoiceChatOptionsComponent(props) {

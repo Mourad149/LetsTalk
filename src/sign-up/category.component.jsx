@@ -1,12 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import useStyles from "./sign-up.style";
+import useStyles from './sign-up.style';
+import { Typography } from '@material-ui/core';
 
 const Category = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.category} onClick={props.onSelect}>
-      I'm a {props.category}
+      <Typography className={classes.categoryText} align="center">
+        I'm a {props.category}
+      </Typography>
     </div>
   );
 };

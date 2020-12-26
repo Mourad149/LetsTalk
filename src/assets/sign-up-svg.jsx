@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import useStyles from "../sign-up/sign-up.style";
+import useStyles from '../sign-up/sign-up.style';
 
 const SignUpSVG = () => {
   const classes = useStyles();
   return (
     <div className={classes.logo}>
-      <h1>Welcome to Let's Talk</h1>
-      <br></br>
       <svg
         id="faaae39e-6d1f-40c0-bc77-dd3f36c97390"
         data-name="Layer 1"

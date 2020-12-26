@@ -7,8 +7,15 @@ import TelegramIcon from '@material-ui/icons/Telegram';
 import io from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 import HasRaisedHandComponent from './has-raised-hand.component';
+import dotenv from 'dotenv';
 
-let socket = io('http://localhost:5000/messaging');
+let socket = io.connect(
+  `https://${process.env.REACT_APP_BASE_URL}:5000/messaging`,
+  {
+    secure: true,
+    rejectUnauthorized: false,
+  }
+);
 
 function MessagingComponent(props) {
   const classes = useStyles();
@@ -16,7 +23,7 @@ function MessagingComponent(props) {
   const [messages, setMessages] = React.useState([]);
   const [userId, setUserId] = React.useState(props.userId);
   React.useEffect(() => {
-    socket.emit('join', { room: props.room });
+    socket.emit('join', { room: props.room, userId: userId });
 
     socket.on('sendToAll', (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
@@ -47,6 +54,7 @@ function MessagingComponent(props) {
                 message={data.message}
                 currentUser={userId === data.senderId ? true : false}
                 userRole={data.userRole}
+                key={uuidv4()}
               />
             );
           else {
@@ -54,6 +62,7 @@ function MessagingComponent(props) {
               <MessageComponent
                 message={data.message}
                 currentUser={userId === data.senderId ? true : false}
+                key={uuidv4()}
               />
             );
           }

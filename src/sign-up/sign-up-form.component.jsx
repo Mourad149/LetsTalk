@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import useStyles from "./sign-up.style";
-import CustomInput from "./custom-input.component";
+import useStyles from './sign-up.style';
+import CustomInput from './custom-input.component';
+import { Typography, Button } from '@material-ui/core';
 
 const SignUpForm = (props) => {
   const classes = useStyles();
@@ -10,72 +11,72 @@ const SignUpForm = (props) => {
   const [state, setState] = useState({
     fields: {
       firstName: {
-        placeholder: "First Name",
-        value: "",
+        placeholder: 'First Name',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Make sure to enter your first name !";
+            return 'Make sure to enter your first name !';
           }
-          let patt = new RegExp("^[a-zA-Z]");
+          let patt = new RegExp('^[a-zA-Z]');
           let res = patt.test(val);
           if (res === false) {
-            return "Invalid name !";
+            return 'Invalid name !';
           }
           return null;
         },
         error: null,
       },
       lastName: {
-        placeholder: "Last Name",
-        value: "",
+        placeholder: 'Last Name',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Make sure to enter your last name !";
+            return 'Make sure to enter your last name !';
           }
-          let patt = new RegExp("^[a-zA-Z]");
+          let patt = new RegExp('^[a-zA-Z]');
           let res = patt.test(val);
           if (res === false) {
-            return "Invalid name !";
+            return 'Invalid name !';
           }
           return null;
         },
         error: null,
       },
       age: {
-        placeholder: "Age",
-        value: "",
+        placeholder: 'Age',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Make sure to enter your age !";
+            return 'Make sure to enter your age !';
           }
-          let patt = new RegExp("^[0-9]");
+          let patt = new RegExp('^[0-9]');
           let res = patt.test(val);
           if (res === false || val > 90) {
-            return "Invalid age !";
+            return 'Invalid age !';
           }
           return null;
         },
         error: null,
       },
       country: {
-        placeholder: "Country",
-        value: "",
+        placeholder: 'Country',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Where do you live ?";
+            return 'Where do you live ?';
           }
-          let patt = new RegExp("^[a-zA-Z]");
+          let patt = new RegExp('^[a-zA-Z]');
           let res = patt.test(val);
           if (res === false) {
-            return "Invalid country !";
+            return 'Invalid country !';
           }
           return null;
         },
         error: null,
       },
       currentPosition: {
-        placeholder: "Current position",
-        value: "",
+        placeholder: 'Current position',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
             return "What's your current position ?";
@@ -85,30 +86,30 @@ const SignUpForm = (props) => {
         error: null,
       },
       mail: {
-        placeholder: "Email",
-        value: "",
+        placeholder: 'Email',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Make sure to enter your email !";
+            return 'Make sure to enter your email !';
           }
-          let patt = new RegExp("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z]");
+          let patt = new RegExp('^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z]');
           let res = patt.test(val);
           if (res === false) {
-            return "Invalid email !";
+            return 'Invalid email !';
           }
           return null;
         },
         error: null,
       },
       password: {
-        placeholder: "Password",
-        value: "",
+        placeholder: 'Password',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Make sure to enter a password !";
+            return 'Make sure to enter a password !';
           }
           if (val.length < 7) {
-            return "Should be at least 7 characters !";
+            return 'Should be at least 7 characters !';
           }
           return null;
         },
@@ -130,12 +131,12 @@ const SignUpForm = (props) => {
 
   const buildObject = () => {
     const obj = {
-      firstName: "",
-      lastName: "",
-      country: "",
-      currentPosition: "",
-      age: "",
-      mail: "",
+      firstName: '',
+      lastName: '',
+      country: '',
+      currentPosition: '',
+      age: '',
+      mail: '',
     };
     for (const key in state.fields) {
       obj[key] = state.fields[key].value;
@@ -161,7 +162,7 @@ const SignUpForm = (props) => {
       const userObject = buildObject();
       axios
         .post(
-          "https://react-20805.firebaseio.com/" + props.userType + ".json",
+          'https://react-20805.firebaseio.com/' + props.userType + '.json',
           userObject
         )
         .then((res) => {
@@ -192,9 +193,9 @@ const SignUpForm = (props) => {
     formFieldsArray.push({ id: key, config: state.fields[key] });
   }
   const inputs = formFieldsArray.map((input) => {
-    let type = "text";
-    if (input.config.placeholder === "Password") {
-      type = "password";
+    let type = 'text';
+    if (input.config.placeholder === 'Password') {
+      type = 'password';
     }
     return (
       <CustomInput
@@ -211,13 +212,15 @@ const SignUpForm = (props) => {
   });
 
   return (
-    <div>
-      <h5>Sign up as a {props.userType}</h5>
-      <form onSubmit={submitForm}>
+    <div style={{ width: '100%' }}>
+      <Typography className={classes.formBanner} align="center" paragraph>
+        Sign up as a {props.userType}
+      </Typography>
+      <form onSubmit={submitForm} className={classes.form}>
         {inputs}
-        <button type="submit" className={classes.submitBtn}>
-          Submit
-        </button>
+        <Button type="submit" className={classes.submitBtn}>
+          <Typography className={classes.submitButtonText}>Submit</Typography>
+        </Button>
       </form>
     </div>
   );
