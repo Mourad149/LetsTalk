@@ -14,9 +14,7 @@ const MeetingCard = (props) => {
         <PeopleIcon className={classes.icon} fontSize="small" />
         <span>{props.participants}</span>
       </div>
-      <p className={classes.startBox}>
-        Starts {props.startDate} at {props.startTime}
-      </p>
+      <p className={classes.startBox}>Starts {props.startTimeStamps}</p>
       <Link to="/meetings/1" className={classes.joinBox}>
         <ArrowForwardIosIcon />
       </Link>

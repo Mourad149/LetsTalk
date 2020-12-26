@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import useStyles from "./meetings-list.style";
 import MeetingCard from "./meeting-card.component";
@@ -7,32 +8,13 @@ import SearchBar from "./meeting-search.component";
 const MeetingsList = (props) => {
   const classes = useStyles();
 
-  const [meetingsState, setMeetings] = useState([
-    {
-      id: 1,
-      theme: "Depression",
-      host: "Zakaria",
-      participants: "20",
-      startTime: "10 PM",
-      startDate: "Feb 27",
-    },
-    {
-      id: 2,
-      theme: "Drugs addiction",
-      host: "Morad",
-      participants: "5",
-      startTime: "11 PM",
-      startDate: "Feb 27",
-    },
-    {
-      id: 3,
-      theme: "Alcoholism",
-      host: "Saad",
-      participants: "8",
-      startTime: "9 PM",
-      startDate: "Feb 27",
-    },
-  ]);
+  const [meetingsState, setMeetings] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/meetings").then((response) => {
+      setMeetings(response.data.meetings);
+    });
+  }, []);
 
   const [searchState, setSearchState] = useState({ searchInput: "" });
   const [filteredMeetings, setFilteredMeetings] = useState([]);
@@ -56,16 +38,15 @@ const MeetingsList = (props) => {
 
   let meetings = usedState.map((meeting) => (
     <MeetingCard
-      key={meeting.id}
+      key={meeting._id}
       theme={meeting.theme}
-      host={meeting.host}
+      host={meeting.hostId}
       participants={meeting.participants}
-      startTime={meeting.startTime}
-      startDate={meeting.startDate}
+      startTimeStamps={meeting.startTimeStamps}
     />
   ));
   if (usedState.length === 0) {
-    meetings = <h1>Not Available</h1>;
+    meetings = <h1 style={{ textAlign: "center" }}>Unavailable meeting</h1>;
   }
 
   return (

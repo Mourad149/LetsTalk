@@ -9,6 +9,9 @@ const useStyles = makeStyles({
       '"themeBox . joinBox" "hostBox . joinBox" "participantBox startBox joinBox"',
     boxShadow: " 1px 1px 5px rgb(214, 214, 214)",
     margin: "5px 20px",
+    "&:hover, &:focus": {
+      boxShadow: " 1px 1px 5px grey",
+    },
   },
   themeBox: {
     gridArea: "themeBox",
