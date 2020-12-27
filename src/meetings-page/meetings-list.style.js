@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     border: "1px solid black",
     paddingLeft: "10px",
     margin: "10px 20px",
-    borderRadius: "5px",
+    borderRadius: "24px",
   },
 });
 
