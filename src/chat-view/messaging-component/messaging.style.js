@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     maxWidth: messageMaxWidth,
     minWidth: messageMinWidth,
     minHeight: messageMinHeight,
-    background: 'linear-gradient(-45deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7))',
+    background: 'linear-gradient(-45deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7))',
     borderRadius: '0px 18px 18px 18px',
 
     margin: '20px',
@@ -22,15 +22,14 @@ const useStyles = makeStyles({
     marginLeft: '0',
     marginRight: 'auto',
     flexDirection: 'column',
-    boxShadow:
-      '-8px 8px 12px 0 rgba(0, 0, 0, 0.25), 4px 4px 8px 0 rgba(255, 255, 255, 0.3)',
+    background: 'linear-gradient(-45deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7))',
   },
   messageRightContainer: {
     display: 'flex',
     maxWidth: messageMaxWidth,
     minWidth: messageMinWidth,
     minHeight: messageMinHeight,
-    background: 'linear-gradient(-45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.9))',
+    background: 'linear-gradient(-45deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7))',
     borderRadius: '18px 0px 18px 18px',
     boxShadow:
       '8px 8px 12px 0 rgba(0, 0, 0, 0.25), -4px -4px 8px 0 rgba(255, 255, 255, 0.3)',
@@ -88,7 +87,7 @@ const useStyles = makeStyles({
   },
   messageIconButton: {
     color: 'white',
-    background: 'linear-gradient(-45deg, rgba(0,0,0,0.8), rgba(0,0,0,1))',
+    background: 'linear-gradient(-45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.8))',
     padding: '10px',
     margin: '5px',
   },
@@ -114,7 +113,7 @@ const useStyles = makeStyles({
   sendButton: {
     margin: '0px 10px 0px 0px',
     color: 'white',
-    background: 'linear-gradient(-45deg, rgba(0,0,0,0.8), rgba(0,0,0,1))',
+    background: 'linear-gradient(-45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.8))',
     padding: '10px',
   },
   userNameLeftStyle: {

@@ -1,20 +1,32 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   meetingsList: {
-    flex: "3",
-    height: "700px",
-    boxShadow: " 1px 1px 5px rgb(214, 214, 214)",
-    margin: "10px",
-    display: "flex",
-    flexDirection: "column",
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
   },
   searchBar: {
-    height: "30px",
-    border: "1px solid black",
-    paddingLeft: "10px",
-    margin: "10px 20px",
-    borderRadius: "5px",
+    height: '2rem',
+    paddingLeft: '10px',
+    margin: '10px 20px',
+    borderRadius: '5px',
+    width: '80%',
+  },
+  searchBarContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  unavailableMeetingsText: {
+    fontSize: '3rem',
+    fontWeight: 600,
+  },
+  availableMeetings: {
+    fontSize: '2.5rem',
+    padding: '10px',
   },
 });
 

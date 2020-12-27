@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import useStyles from "./meetings-list.style";
-import MeetingCard from "./meeting-card.component";
-import SearchBar from "./meeting-search.component";
+import useStyles from './meetings-list.style';
+import MeetingCard from './meeting-card.component';
+import SearchBar from './meeting-search.component';
+import { Typography } from '@material-ui/core';
 
 const MeetingsList = (props) => {
   const classes = useStyles();
@@ -11,12 +12,26 @@ const MeetingsList = (props) => {
   const [meetingsState, setMeetings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/meetings").then((response) => {
-      setMeetings(response.data.meetings);
-    });
+    setMeetings([
+      {
+        host: 'Azziz Zakaria',
+        theme: 'Depression',
+        startTime: '2020',
+      },
+      {
+        host: 'Azziz Zakaria',
+        theme: 'Depression',
+        startTime: '2020',
+      },
+      {
+        host: 'Azziz Zakaria',
+        theme: 'Depression',
+        startTime: '2020',
+      },
+    ]);
   }, []);
 
-  const [searchState, setSearchState] = useState({ searchInput: "" });
+  const [searchState, setSearchState] = useState({ searchInput: '' });
   const [filteredMeetings, setFilteredMeetings] = useState([]);
 
   const onSearchHandler = (event) => {
@@ -32,7 +47,7 @@ const MeetingsList = (props) => {
   };
 
   let usedState = meetingsState;
-  if (searchState.searchInput !== "") {
+  if (searchState.searchInput !== '') {
     usedState = filteredMeetings;
   }
 
@@ -46,12 +61,18 @@ const MeetingsList = (props) => {
     />
   ));
   if (usedState.length === 0) {
-    meetings = <h1 style={{ textAlign: "center" }}>Unavailable meeting</h1>;
+    meetings = (
+      <Typography align="center" className={classes.unavailableMeetingsText}>
+        Unavailable meeting
+      </Typography>
+    );
   }
 
   return (
     <div className={classes.meetingsList}>
-      <h5 style={{ textAlign: "center" }}>Available meetings</h5>
+      <Typography align="center" className={classes.availableMeetings}>
+        Available meetings
+      </Typography>
       <SearchBar
         value={searchState.searchInput}
         onChange={(event) => onSearchHandler(event)}

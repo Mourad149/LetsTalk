@@ -12,12 +12,7 @@ function ChatViewComponent(props) {
   const [userRole, setUserRole] = React.useState('admin');
 
   return (
-    <Grid
-      container
-      style={{
-        height: '100%',
-      }}
-    >
+    <Grid container className={classes.chatViewGridContainer}>
       <Grid item md={9} className={classes.voiceChatGridContainer}>
         <VoiceChatComponent
           room={props.match.params.id}

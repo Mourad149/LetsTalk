@@ -1,33 +1,32 @@
-import React from "react";
-import { Avatar } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
+import React from 'react';
+import { Avatar, Typography } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 
-import useStyles from "./profile-card.style";
+import useStyles from './profile-card.style';
 
 const ProfileCard = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.profileCard}>
-      <h5 style={{ textAlign: "center" }}>Your profile</h5>
       <Avatar className={classes.avatar} />
-      <p className={classes.name} style={{ textAlign: "center" }}>
+      <Typography className={classes.name} align="center">
         Zakaria Azziz
-      </p>
-      <p className={classes.pseudo} style={{ textAlign: "center" }}>
+      </Typography>
+      <Typography className={classes.pseudo} align="center">
         TheRedHacker
-      </p>
-      <p className={classes.description}>
+      </Typography>
+      <Typography className={classes.description}>
         Actuellement étudiant en 3ème année à l’Ecole Nationale Supérieur
         d’Informatique et d’Analyse des Systèmes
-      </p>
+      </Typography>
       <div className={classes.editBox}>
-        <span>Edit Profile</span>
+        <Typography>Edit Profile</Typography>
         <EditIcon className={classes.icon} fontSize="small" />
       </div>
       <div className={classes.meetingsNetwork}>
         <PeopleOutlineIcon className={classes.icon} fontSize="small" />
-        <span>14 meetings</span>
+        <Typography>14 meetings</Typography>
       </div>
     </div>
   );
