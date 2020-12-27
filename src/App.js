@@ -1,10 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import VoiceChatComponent from './chat-view/voice-chat.component';
+import "./App.css";
+
+import { BrowserRouter as Router } from "react-router-dom";
+import RoutesComponent from "./routes.component";
+
 function App() {
   return (
-    <div className="App">
-      <VoiceChatComponent />
+    <div style={{ height: "100vh" }}>
+      <Router>
+        <RoutesComponent />
+      </Router>
     </div>
   );
 }
