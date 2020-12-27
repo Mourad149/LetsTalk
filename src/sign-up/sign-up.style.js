@@ -5,6 +5,16 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     height: '100%',
+    position: 'absolute',
+    top: '0',
+  },
+  waveBackground: {
+    position: 'absolute',
+  },
+  signupPageContainer: {
+    height: '100%',
+    width: '100%',
+    position: 'relative',
   },
   container: {
     height: '100%',
@@ -24,6 +34,7 @@ const useStyles = makeStyles({
     color: 'black',
     '&:hover': {
       background: 'linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.8))',
+      cursor: 'pointer',
     },
     borderRadius: '24px',
     background: 'linear-gradient(-45deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7))',
