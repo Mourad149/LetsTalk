@@ -123,7 +123,78 @@ const CreateMeetingForm = (props) => {
       axios
         .post("http://localhost:5000/meetings", meetingObject)
         .then((res) => {
-          console.log(res);
+          // Reset State
+          setState({
+            fields: {
+              theme: {
+                placeholder: "Theme",
+                value: "",
+                validator: (val) => {
+                  if (val.length === 0) {
+                    return "Please specify a theme !";
+                  }
+                  let patt = new RegExp("^[a-zA-Z]");
+                  let res = patt.test(val);
+                  if (res === false) {
+                    return "Invalid !";
+                  }
+                  return null;
+                },
+                error: null,
+              },
+              description: {
+                placeholder: "Description",
+                value: "",
+                validator: (val) => {
+                  if (val.length === 0) {
+                    return "It's about what ?";
+                  }
+                  let patt = new RegExp("^[a-zA-Z]");
+                  let res = patt.test(val);
+                  if (res === false) {
+                    return "Invalid !";
+                  }
+                  return null;
+                },
+                error: null,
+              },
+              startDate: {
+                placeholder: "Start Date",
+                value: "",
+                validator: (val) => {
+                  if (val.length === 0) {
+                    return "Please specify a date !";
+                  }
+                  //   let patt = new RegExp("^[0-9]");
+                  //   let res = patt.test(val);
+                  //   if (res === false || val > 90) {
+                  //     return "Invalid age !";
+                  //   }
+                  return null;
+                },
+                error: null,
+              },
+              startTime: {
+                placeholder: "Start Time",
+                value: "",
+                validator: (val) => {
+                  if (val.length === 0) {
+                    return "When ?";
+                  }
+                  //   let patt = new RegExp("^[a-zA-Z]");
+                  //   let res = patt.test(val);
+                  //   if (res === false) {
+                  //     return "Invalid country !";
+                  //   }
+                  return null;
+                },
+                error: null,
+              },
+            },
+            firstCheck: true,
+          });
+          // Hide the Modal
+          props.hideModal();
         })
         .catch((err) => console.log(err));
     } else {

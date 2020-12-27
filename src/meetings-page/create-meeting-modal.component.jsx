@@ -17,8 +17,7 @@ const CreateMeetingModal = (props) => {
           onClick={props.hideModal}
           className={classes.modalClose}
         />
-
-        <CreateMeetingForm />
+        <CreateMeetingForm hideModal={props.hideModal} />
       </div>
     </div>
   );
