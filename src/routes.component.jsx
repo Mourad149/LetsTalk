@@ -4,6 +4,7 @@ import ChatViewComponent from './chat-view/chat-view.component';
 import MeetingPage from './meetings-page/meeting-page.component';
 import SignUpPage from './sign-up/sign-up-page.component';
 import LayoutComponent from './layout/layout.component';
+import HomePageComponent from './home-page/home-page.component';
 
 function RoutesComponent() {
   return (
@@ -11,7 +12,10 @@ function RoutesComponent() {
       <Route exact path="/meetings" component={MeetingPage} />
       <Route path="/meetings/:id" exact component={ChatViewComponent} />
       <Route exact path="/signUp">
-        <LayoutComponent component={<SignUpPage />} />{' '}
+        <LayoutComponent component={<SignUpPage />} />
+      </Route>
+      <Route path="/" exact>
+        <LayoutComponent component={<HomePageComponent />} />
       </Route>
     </Switch>
   );
