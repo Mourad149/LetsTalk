@@ -214,7 +214,11 @@ const SignUpForm = (props) => {
   });
   const transitions = useTransition(show, null, {
     from: { transform: `translate3d(400px,0,0)`, opacity: '0' },
-    enter: { transform: `translate3d(0px,0,0)`, opacity: '1' },
+    enter: {
+      transform: `translate3d(0px,0,0)`,
+      opacity: '1',
+      transition: 'opacity 0.3s',
+    },
     leave: { transform: `translate3d(-400px,0,0)`, opacity: '0' },
     config: {
       duration: 500,
