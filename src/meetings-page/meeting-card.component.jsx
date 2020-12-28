@@ -11,9 +11,22 @@ const MeetingCard = (props) => {
   const [show, set] = React.useState(false);
 
   const transitions = useTransition(show, (item) => item.key, {
-    from: { transform: `translate3d(${2 * props.index * 100}px,0,0)` },
-    enter: { transform: `translate3d(0px,0,0)` },
-    leave: { transform: `translate3d(0,0,${2 * props.index * -100}px)` },
+    from: {
+      transform: `translate3d(${2 * props.index * 200}px,${
+        (props.index - 1) * 100
+      }px,0px)`,
+      opacity: '0.3',
+    },
+    enter: { transform: `translate3d(0px,0,0)`, opacity: '1' },
+    leave: {
+      transform: `translate3d(${2 * props.index * -200}px,${
+        (props.index - 1) * -200
+      }px,0)`,
+      opacity: '0.3',
+    },
+    config: {
+      duration: 400,
+    },
   });
   return transitions.map(({ item, key, props }) => (
     <animated.div style={props} className={classes.meetingCard}>

@@ -4,9 +4,11 @@ import axios from 'axios';
 import useStyles from './sign-up.style';
 import CustomInput from './custom-input.component';
 import { Typography, Button } from '@material-ui/core';
+import { useTransition, animated } from 'react-spring';
 
 const SignUpForm = (props) => {
   const classes = useStyles();
+  const [show, set] = useState(false);
 
   const [state, setState] = useState({
     fields: {
@@ -210,9 +212,16 @@ const SignUpForm = (props) => {
       />
     );
   });
-
-  return (
-    <div style={{ width: '100%' }}>
+  const transitions = useTransition(show, null, {
+    from: { transform: `translate3d(400px,0,0)`, opacity: '0' },
+    enter: { transform: `translate3d(0px,0,0)`, opacity: '1' },
+    leave: { transform: `translate3d(-400px,0,0)`, opacity: '0' },
+    config: {
+      duration: 500,
+    },
+  });
+  return transitions.map(({ item, key, props }) => (
+    <animated.div style={{ width: '100%', ...props }}>
       <Typography className={classes.formBanner} align="center" paragraph>
         Sign up as a {props.userType}
       </Typography>
@@ -222,8 +231,8 @@ const SignUpForm = (props) => {
           <Typography className={classes.submitButtonText}>Submit</Typography>
         </Button>
       </form>
-    </div>
-  );
+    </animated.div>
+  ));
 };
 
 export default SignUpForm;

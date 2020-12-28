@@ -1,6 +1,7 @@
 import React from 'react';
 import useStyles from './layout.style';
 import WaveSvg from '../assets/wave';
+import LetsTalkLogoComponent from '../assets/letsTalks-logo.component';
 
 function LayoutComponent(props) {
   const classes = useStyles();

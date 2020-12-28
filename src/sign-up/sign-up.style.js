@@ -11,17 +11,14 @@ const useStyles = makeStyles({
   waveBackground: {
     position: 'absolute',
   },
-  signupPageContainer: {
-    height: '100%',
-    width: '100%',
-    position: 'relative',
-  },
   container: {
     height: '100%',
     width: '70%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflowX: 'hidden',
+    padding: '20% 10px 0 10px',
   },
   logo: {
     display: 'flex',
