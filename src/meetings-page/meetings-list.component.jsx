@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import useStyles from './meetings-list.style';
 import MeetingCard from './meeting-card.component';
 import SearchBar from './meeting-search.component';
@@ -9,27 +8,27 @@ import { Typography } from '@material-ui/core';
 const MeetingsList = (props) => {
   const classes = useStyles();
 
-  const [meetingsState, setMeetings] = useState([]);
+  const [meetingsState, setMeetings] = useState([
+    {
+      host: 'Azziz Zakaria',
+      theme: 'Depression',
+      startTime: '2020',
+    },
+    {
+      host: 'Azziz Zakaria',
+      theme: 'Depression',
+      startTime: '2020',
+    },
+    {
+      host: 'Azziz Zakaria',
+      theme: 'Depression',
+      startTime: '2020',
+    },
+  ]);
 
-  useEffect(() => {
-    setMeetings([
-      {
-        host: 'Azziz Zakaria',
-        theme: 'Depression',
-        startTime: '2020',
-      },
-      {
-        host: 'Azziz Zakaria',
-        theme: 'Depression',
-        startTime: '2020',
-      },
-      {
-        host: 'Azziz Zakaria',
-        theme: 'Depression',
-        startTime: '2020',
-      },
-    ]);
-  }, []);
+  // useEffect(() => {
+  //   setMeetings();
+  // }, []);
 
   const [searchState, setSearchState] = useState({ searchInput: '' });
   const [filteredMeetings, setFilteredMeetings] = useState([]);
@@ -51,15 +50,18 @@ const MeetingsList = (props) => {
     usedState = filteredMeetings;
   }
 
-  let meetings = usedState.map((meeting) => (
-    <MeetingCard
-      key={meeting._id}
-      theme={meeting.theme}
-      host={meeting.hostId}
-      participants={meeting.participants}
-      startTimeStamps={meeting.startTimeStamps}
-    />
-  ));
+  let meetings = usedState.map((item, index) => {
+    return (
+      <MeetingCard
+        key={item._id}
+        host={item.hostId}
+        theme={item.theme}
+        participants={item.participants}
+        startTimeStamps={item.startTimeStamps}
+        index={index + 1}
+      />
+    );
+  });
   if (usedState.length === 0) {
     meetings = (
       <Typography align="center" className={classes.unavailableMeetingsText}>

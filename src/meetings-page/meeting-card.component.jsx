@@ -4,11 +4,19 @@ import PeopleIcon from '@material-ui/icons/People';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
+import { useTransition, animated } from 'react-spring';
 
 const MeetingCard = (props) => {
   const classes = useStyles();
-  return (
-    <div className={classes.meetingCard}>
+  const [show, set] = React.useState(false);
+
+  const transitions = useTransition(show, (item) => item.key, {
+    from: { transform: `translate3d(${2 * props.index * 100}px,0,0)` },
+    enter: { transform: `translate3d(0px,0,0)` },
+    leave: { transform: `translate3d(0,0,${2 * props.index * -100}px)` },
+  });
+  return transitions.map(({ item, key, props }) => (
+    <animated.div style={props} className={classes.meetingCard}>
       <Typography className={classes.themeBox}>#{props.theme}</Typography>
       <Typography className={classes.hostBox}>
         Hosted by {props.host}
@@ -23,7 +31,7 @@ const MeetingCard = (props) => {
       <Link to="/meetings/1" className={classes.joinBox}>
         <ArrowForwardIosIcon />
       </Link>
-    </div>
-  );
+    </animated.div>
+  ));
 };
 export default MeetingCard;
