@@ -3,13 +3,14 @@ import { Avatar, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import CreateMeetingModal from './create-meeting-modal.component';
-
+import { useTransition, animated } from 'react-spring';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 
 import useStyles from './profile-card.style';
 
 const ProfileCard = (props) => {
   const classes = useStyles();
+  const [show, set] = useState(false);
 
   const [state, setState] = useState({ showModal: false });
 
@@ -25,8 +26,22 @@ const ProfileCard = (props) => {
     ? classes.displayBlock
     : classes.displayNone;
 
-  return (
-    <div className={classes.profileCard}>
+  const transitions = useTransition(show, (item) => item.key, {
+    from: {
+      transform: `translate3d(${-200}px,0px,0px)`,
+      opacity: '0.3',
+    },
+    enter: { transform: `translate3d(0px,0,0)`, opacity: '1' },
+    leave: {
+      transform: `translate3d(${-200}px,0px,0)`,
+      opacity: '0.3',
+    },
+    config: {
+      duration: 400,
+    },
+  });
+  return transitions.map(({ item, key, props }) => (
+    <animated.div className={classes.profileCard} style={props}>
       <Avatar className={classes.avatar} />
       <Typography className={classes.name} align="center">
         Zakaria Azziz
@@ -51,7 +66,7 @@ const ProfileCard = (props) => {
         <Typography>14 meetings</Typography>
       </div>
       <CreateMeetingModal cssClass={modalClassName} hideModal={hideModal} />
-    </div>
-  );
+    </animated.div>
+  ));
 };
 export default ProfileCard;
