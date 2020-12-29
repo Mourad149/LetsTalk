@@ -9,8 +9,16 @@ import HomePageComponent from './home-page/home-page.component';
 function RoutesComponent() {
   return (
     <Switch>
-      <Route exact path="/meetings" component={MeetingPage} />
-      <Route path="/meetings/:id" exact component={ChatViewComponent} />
+      <Route
+        exact
+        path="/meetings/:anonym/:isAdmin/:userId"
+        component={MeetingPage}
+      />
+      <Route
+        path="/meetings/:anonym/:userId/:meetingId"
+        exact
+        component={ChatViewComponent}
+      />
       <Route exact path="/signUp">
         <LayoutComponent component={<SignUpPage />} />
       </Route>

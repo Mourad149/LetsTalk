@@ -224,8 +224,8 @@ const SignUpForm = (props) => {
       duration: 500,
     },
   });
-  return transitions.map(({ item, key, props }) => (
-    <animated.div style={{ width: '100%', ...props }}>
+  return transitions.map(({ item, key, props: style }) => (
+    <animated.div style={{ width: '100%', ...style }}>
       <Typography className={classes.formBanner} align="center" paragraph>
         Sign up as a {props.userType}
       </Typography>

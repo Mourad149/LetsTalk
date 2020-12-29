@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import useStyles from './home-page.style';
 import { useTransition, animated } from 'react-spring';
 import { Link } from 'react-router-dom';
+import AnonymousLogoComponent from '../assets/anonymous-logo.component';
 function HomePageComponent() {
   const classes = useStyles();
   const [show, set] = React.useState(false);
@@ -29,23 +30,35 @@ function HomePageComponent() {
       <Typography className={classes.homePageBanner} align="center">
         Welcome to Let's Talk, here you can share about your thoughts !
       </Typography>
-      <div className={classes.buttonsContainer}>
+      <div className={classes.primaryButtonsContainer}>
+        <div className={classes.buttonsContainer}>
+          <Link
+            className={classes.homePageButton}
+            style={{ textDecoration: 'none' }}
+            to="/signup"
+          >
+            <Typography className={classes.buttonText} align="center">
+              Subscribe
+            </Typography>
+          </Link>
+          <Link
+            className={classes.homePageButton}
+            style={{ textDecoration: 'none' }}
+            to="/login"
+          >
+            <Typography className={classes.buttonText} align="center">
+              Login
+            </Typography>
+          </Link>
+        </div>
         <Link
-          className={classes.homePageButton}
+          className={classes.joinAnonymButton}
           style={{ textDecoration: 'none' }}
-          to="/signup"
+          to={`/meetings/${true}/${false}/${2}`}
         >
-          <Typography className={classes.buttonText} align="center">
-            Subscribe
-          </Typography>
-        </Link>
-        <Link
-          className={classes.homePageButton}
-          style={{ textDecoration: 'none' }}
-          to="/login"
-        >
-          <Typography className={classes.buttonText} align="center">
-            Login
+          <AnonymousLogoComponent />
+          <Typography className={classes.anonymButtonText} align="center">
+            Or join meetings anonymously
           </Typography>
         </Link>
       </div>
