@@ -4,11 +4,26 @@ import useStyles from './meetings-list.style';
 import MeetingCard from './meeting-card.component';
 import SearchBar from './meeting-search.component';
 import { Typography } from '@material-ui/core';
-
+import { v4 as uuidv4 } from 'uuid';
 const MeetingsList = (props) => {
   const classes = useStyles();
 
   const [meetingsState, setMeetings] = useState([
+    {
+      host: 'Azziz Zakaria',
+      theme: 'Depression',
+      startTime: '2020',
+    },
+    {
+      host: 'Azziz Zakaria',
+      theme: 'Depression',
+      startTime: '2020',
+    },
+    {
+      host: 'Azziz Zakaria',
+      theme: 'Depression',
+      startTime: '2020',
+    },
     {
       host: 'Azziz Zakaria',
       theme: 'Depression',
@@ -53,7 +68,7 @@ const MeetingsList = (props) => {
   let meetings = usedState.map((item, index) => {
     return (
       <MeetingCard
-        key={item._id}
+        key={index}
         host={item.hostId}
         theme={item.theme}
         participants={item.participants}

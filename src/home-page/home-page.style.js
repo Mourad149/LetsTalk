@@ -7,11 +7,15 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     flexDirection: 'column',
   },
+  primaryButtonsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   buttonsContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '45%',
+    width: '100%',
   },
   homePageButton: {
     padding: '30px',
@@ -25,6 +29,28 @@ const useStyles = makeStyles({
     minWidth: '15rem',
     margin: '20px',
   },
+  joinAnonymButton: {
+    padding: '30px',
+    color: 'black',
+    '&:hover': {
+      boxShadow: '0 0 4px 4px rgba(0,0,0,0.2)',
+      cursor: 'pointer',
+    },
+    borderRadius: '24px',
+    background: 'linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2))',
+    minWidth: '15rem',
+    maxWidth: '100%',
+    margin: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  anonymButtonText: {
+    fontSize: '1.5rem',
+    color: 'black',
+    fontWeight: 600,
+  },
+
   homePageBanner: {
     fontSize: '3rem',
     fontWeight: 600,

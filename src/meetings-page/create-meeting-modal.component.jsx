@@ -14,7 +14,7 @@ const CreateMeetingModal = (props) => {
           Create a new meeting !
         </Typography>
         <HighlightOffIcon
-          onClick={props.hideModal}
+          onClick={() => props.hideModal()}
           className={classes.modalClose}
         />
         <CreateMeetingForm hideModal={props.hideModal} />
