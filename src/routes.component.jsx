@@ -15,7 +15,7 @@ function RoutesComponent() {
         component={MeetingPage}
       />
       <Route
-        path="/meetings/:anonym/:userId/:meetingId"
+        path="/meetings/:anonym/:isAdmin/:userId/:meetingId"
         exact
         component={ChatViewComponent}
       />

@@ -21,11 +21,13 @@ const useStyles = makeStyles({
     padding: '30px',
     color: 'black',
     '&:hover': {
-      background: 'linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.8))',
+      background:
+        'linear-gradient(45deg, rgba(2, 62, 138,1), rgba(2, 62, 138,1))',
       cursor: 'pointer',
     },
     borderRadius: '24px',
-    background: 'linear-gradient(-45deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7))',
+    background:
+      'linear-gradient(-45deg, rgba(2, 62, 138, 0.8), rgba(2, 62, 138, 0.9))',
     minWidth: '15rem',
     margin: '20px',
   },
@@ -37,7 +39,9 @@ const useStyles = makeStyles({
       cursor: 'pointer',
     },
     borderRadius: '24px',
-    background: 'linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2))',
+    background:
+      'linear-gradient(-90deg, rgba(2, 62, 138, 0.2), rgba(2, 62, 138, 0.9))',
+
     minWidth: '15rem',
     maxWidth: '100%',
     margin: '10px',
