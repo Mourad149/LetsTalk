@@ -28,8 +28,8 @@ const MeetingCard = (props) => {
       duration: 400,
     },
   });
-  return transitions.map(({ item, key, props }) => (
-    <animated.div style={props} className={classes.meetingCard}>
+  return transitions.map(({ item, key, props: style }) => (
+    <animated.div style={style} className={classes.meetingCard}>
       <Typography className={classes.themeBox}>#{props.theme}</Typography>
       <Typography className={classes.hostBox}>
         Hosted by {props.host}
