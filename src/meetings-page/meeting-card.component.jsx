@@ -41,7 +41,7 @@ const MeetingCard = (props) => {
       <Typography className={classes.startBox}>
         Starts {props.startTimeStamps}
       </Typography>
-      <Link to="/meetings/1" className={classes.joinBox}>
+      <Link to={`/meetings/${true}/${false}/2/1`} className={classes.joinBox}>
         <ArrowForwardIosIcon />
       </Link>
     </animated.div>
