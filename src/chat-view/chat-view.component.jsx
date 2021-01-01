@@ -5,7 +5,6 @@ import useStyles from './chat-view.style';
 import VoiceChatComponent from './voice-chat-component/voice-chat.component';
 import { v4 as uuidv4 } from 'uuid';
 import io from 'socket.io-client';
-
 function ChatViewComponent(props) {
   const classes = useStyles();
   const [userId, setUserId] = React.useState(uuidv4());
@@ -15,14 +14,14 @@ function ChatViewComponent(props) {
     <Grid container className={classes.chatViewGridContainer}>
       <Grid item md={9} className={classes.voiceChatGridContainer}>
         <VoiceChatComponent
-          room={props.match.params.id}
+          room={props.match.params.meetingId}
           userId={userId}
           userRole={userRole}
         />
       </Grid>
       <Grid item md={3} className={classes.gridMessagesContainer}>
         <MessagingComponent
-          room={props.match.params.id}
+          room={props.match.params.meetingId}
           userId={userId}
           userRole={userRole}
         />

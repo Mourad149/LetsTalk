@@ -28,8 +28,8 @@ const MeetingCard = (props) => {
       duration: 400,
     },
   });
-  return transitions.map(({ item, key, props }) => (
-    <animated.div style={props} className={classes.meetingCard}>
+  return transitions.map(({ item, key, props: style }) => (
+    <animated.div style={style} className={classes.meetingCard}>
       <Typography className={classes.themeBox}>#{props.theme}</Typography>
       <Typography className={classes.hostBox}>
         Hosted by {props.host}
@@ -41,7 +41,7 @@ const MeetingCard = (props) => {
       <Typography className={classes.startBox}>
         Starts {props.startTimeStamps}
       </Typography>
-      <Link to="/meetings/1" className={classes.joinBox}>
+      <Link to={`/meetings/${true}/${false}/2/1`} className={classes.joinBox}>
         <ArrowForwardIosIcon />
       </Link>
     </animated.div>

@@ -44,7 +44,9 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2))',
+    background:
+      'linear-gradient(-45deg, rgba(2, 62, 138, 0.6), rgba(2, 62, 138, 0.9))',
+
     boxShadow: '0 0 4px 2px rgba(0,0,0,0.1)',
     margin: 'auto',
   },
@@ -69,7 +71,8 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '5px',
-    background: 'linear-gradient(-45deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7))',
+    background:
+      'linear-gradient(-90deg, rgba(2, 62, 138, 0.7), rgba(2, 62, 138, 0.9))',
     color: 'white',
     '&:hover, &:focus': {
       backgroundColor: 'rgb(214, 214, 214, 0.2)',

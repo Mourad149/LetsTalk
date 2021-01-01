@@ -23,6 +23,11 @@ function VoiceChatOptionsComponent(props) {
   React.useEffect(() => {
     socket.emit('join', { room: props.room });
   }, []);
+  React.useEffect(() => {
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   const raiseHand = () => {
     socket.emit('handRaised', {
       handRaiser: userId,
