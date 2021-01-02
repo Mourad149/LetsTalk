@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    overflowX: 'hidden',
   },
   searchBar: {
     height: '2rem',

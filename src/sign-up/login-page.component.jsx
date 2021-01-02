@@ -1,11 +1,12 @@
-import React from 'react';
-import { useTransition, animated } from 'react-spring';
+import React from "react";
+import { useTransition, animated } from "react-spring";
 
-import useStyles from './sign-up.style';
-import SignUpContainer from './sign-up-container-component';
-import Logo from '../assets/sign-up-svg';
-import { Grid, Typography } from '@material-ui/core';
-const SignUpPage = (props) => {
+import useStyles from "./sign-up.style";
+import LoginForm from "./login-form.component";
+import Logo from "../assets/sign-up-svg";
+import { Grid, Typography } from "@material-ui/core";
+
+const LoginPage = (props) => {
   const classes = useStyles();
   const [show, set] = React.useState(false);
   const transitions = useTransition(show, null, {
@@ -17,7 +18,7 @@ const SignUpPage = (props) => {
     },
   });
   return transitions.map(({ item, props, key }) => (
-    <animated.div style={{ display: 'flex', width: '100%', ...props }}>
+    <animated.div style={{ display: "flex", width: "100%", ...props }}>
       <Grid container className={classes.page}>
         <Grid item md={7} className={classes.gridItemContainer}>
           <Typography className={classes.bannerText} align="center" paragraph>
@@ -25,10 +26,10 @@ const SignUpPage = (props) => {
           </Typography>
         </Grid>
         <Grid item md={5} className={classes.gridItemContainer}>
-          <SignUpContainer />
+          <LoginForm />
         </Grid>
       </Grid>
     </animated.div>
   ));
 };
-export default SignUpPage;
+export default LoginPage;

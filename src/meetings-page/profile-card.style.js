@@ -2,7 +2,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   profileCard: {
-    height: '100%',
+    width: '100%',
+    minWidth: '100%',
+    maxWidth: '100%',
+  },
+  anonymProfileCard: {
+    height: '50%',
+    width: '100%',
+    minWidth: '100%',
+    maxWidth: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   name: {
     fontSize: '2rem',
@@ -21,10 +32,21 @@ const useStyles = makeStyles({
     },
   },
   avatar: {
-    height: '200px',
-    width: '200px',
+    height: '15rem',
+    width: '15rem',
     margin: 'auto',
     backgroundColor: 'black',
+  },
+  anonymousLogoContainer: {
+    height: '15rem',
+    width: '15rem',
+    borderRadius: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'linear-gradient(45deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2))',
+    boxShadow: '0 0 4px 2px rgba(0,0,0,0.1)',
+    margin: 'auto',
   },
   editBox: {
     border: '1px solid black',
@@ -38,6 +60,7 @@ const useStyles = makeStyles({
       backgroundColor: 'rgb(214, 214, 214, 0.2)',
       cursor: 'pointer',
     },
+    width: '90%',
   },
   addBox: {
     padding: '7px',
@@ -52,6 +75,7 @@ const useStyles = makeStyles({
       backgroundColor: 'rgb(214, 214, 214, 0.2)',
       cursor: 'pointer',
     },
+    width: '90%',
   },
   description: {
     margin: '20px 0px',
@@ -86,25 +110,6 @@ const useStyles = makeStyles({
     '&:hover, &:focus': {
       color: 'black',
     },
-  },
-  displayBlock: {
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    background: 'rgba(0, 0, 0, 0.6)',
-    display: 'block',
-  },
-
-  displayNone: {
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    background: 'rgba(0, 0, 0, 0.6)',
-    display: 'none',
   },
 });
 
