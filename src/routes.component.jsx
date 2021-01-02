@@ -10,13 +10,19 @@ import HomePageComponent from "./home-page/home-page.component";
 function RoutesComponent() {
   return (
     <Switch>
-      ---------------
+
       <Route
         exact
         path="/meetings/:anonym/:isAdmin/:userId"
         component={MeetingPage}
       />
-      <Route path="/meetings/:meetingId" exact component={ChatViewComponent} />
+
+      <Route
+        path="/meetings/:anonym/:isAdmin/:userId/:meetingId"
+        exact
+        component={ChatViewComponent}
+      />
+
       <Route exact path="/signUp">
         <LayoutComponent component={<SignUpPage />} />
       </Route>

@@ -6,7 +6,17 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+
+
     overflowX: 'hidden',
+  },
+  circularContainer: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
   searchBar: {
     height: '2rem',

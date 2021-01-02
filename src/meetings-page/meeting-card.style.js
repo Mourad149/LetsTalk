@@ -12,7 +12,9 @@ const useStyles = makeStyles({
       boxShadow: ' 1px 1px 5px grey',
     },
     borderRadius: '24px',
-    background: 'linear-gradient(-45deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7))',
+    background:
+      'linear-gradient(-90deg, rgba(2, 62, 138, 0.7), rgba(2, 62, 138, 0.9))',
+
     padding: '10px',
   },
   themeBox: {
@@ -58,8 +60,11 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'center',
     '&:hover, &:focus': {
-      backgroundColor: 'grey',
+      backgroundColor: 'white',
+      opacity: '0.4',
+      color: '#023e8a',
     },
+    borderRadius: '0 24px 24px 0',
     borderLeft: '1px solid white',
   },
   icon: {

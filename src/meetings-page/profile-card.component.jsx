@@ -58,7 +58,9 @@ const ProfileCard = (props) => {
         </Typography>
       </animated.div>
     ) : (
-      <animated.div className={classes.profileCard} style={props}>
+
+      <animated.div className={classes.profileCard} style={style}>
+
         <Avatar className={classes.avatar} />
         <Typography className={classes.name} align="center">
           Zakaria Azziz

@@ -1,64 +1,102 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import useStyles from "./meetings-list.style";
-import MeetingCard from "./meeting-card.component";
-import SearchBar from "./meeting-search.component";
-import { Typography } from "@material-ui/core";
-import { v4 as uuidv4 } from "uuid";
+
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import useStyles from './meetings-list.style';
+import MeetingCard from './meeting-card.component';
+import SearchBar from './meeting-search.component';
+import { Typography } from '@material-ui/core';
+import { v4 as uuidv4 } from 'uuid';
+import BackdropComponent from '../utils/backdrop.component';
+import { CircularProgress } from '@material-ui/core';
+
 const MeetingsList = (props) => {
   const classes = useStyles();
 
-  const [meetingsState, setMeetings] = useState([]);
+  const [meetings, setMeetings] = useState([]);
+  const [usedState, setUsedState] = useState([]);
+  const [searchState, setSearchState] = useState({ searchInput: '' });
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/meetings").then((res) => {
-      console.log(res.data.meetings);
-      setMeetings(res.data.meetings);
-    });
-  }, []);
-
-  const [searchState, setSearchState] = useState({ searchInput: "" });
   const [filteredMeetings, setFilteredMeetings] = useState([]);
-
+  const [skip, setSkip] = useState(0);
+  const [meetingsAreLoading, setMeetingsAreLoading] = useState(true);
+  const myRef = useRef();
   const onSearchHandler = (event) => {
     setSearchState({ searchInput: event.target.value });
-    filterMeetings(event.target.value);
+    filterMeetingsFunc(event.target.value);
   };
 
-  const filterMeetings = (val) => {
-    const filteredMeetings = meetingsState.filter((meeting) =>
-      meeting.theme.startsWith(val)
+  const filterMeetingsFunc = (val) => {
+    setFilteredMeetings(
+      usedState.filter((meeting) => meeting.theme.startsWith(val))
     );
-    setFilteredMeetings([...filteredMeetings]);
+  };
+  const onScroll = () => {
+    const scrollY = window.scrollY;
+    const scrollTop = myRef.current.scrollTop;
+    const scrollHeight = myRef.current.scrollHeight;
+    const offsetHeight = myRef.current.offsetHeight;
+    const clientHeight = myRef.current.clientHeight;
+    if (scrollHeight - offsetHeight - scrollTop < 1) {
+      setSkip(usedState.length);
+    }
   };
 
-  let usedState = meetingsState;
-  if (searchState.searchInput !== "") {
-    usedState = filteredMeetings;
-  }
 
-  let meetings = usedState.map((item, index) => {
-    return (
-      <MeetingCard
-        key={index}
-        host={item.hostId}
-        theme={item.theme}
-        participants={item.participants}
-        startTimeStamps={item.startTimeStamps}
-        index={index + 1}
-      />
-    );
-  });
-  if (usedState.length === 0) {
-    meetings = (
-      <Typography align="center" className={classes.unavailableMeetingsText}>
-        Unavailable meeting
-      </Typography>
-    );
-  }
+  useEffect(() => {
+    axios
+      .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${skip}`)
+      .then((res) => {
+        setUsedState((prevState) => [...prevState, ...res.data.meetings]);
+        setMeetingsAreLoading(false);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, [skip]);
+  useEffect(() => {
+    if (searchState.searchInput !== '') {
+      setUsedState([...filteredMeetings]);
+    } else {
+      axios
+        .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${0}`)
+        .then((res) => {
+          setUsedState((prevState) => [...res.data.meetings]);
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [filteredMeetings]);
+
+  useEffect(() => {
+    setMeetings(() => {
+      if (usedState.length !== 0) {
+        return usedState?.map((item, index) => {
+          return (
+            <MeetingCard
+              key={index}
+              host={item.hostId}
+              theme={item.theme}
+              participants={item.participants}
+              startTimeStamps={item.startTimeStamps}
+              index={index + 1}
+            />
+          );
+        });
+      } else {
+        return (
+          <Typography
+            align="center"
+            className={classes.unavailableMeetingsText}
+          >
+            Unavailable meeting
+          </Typography>
+        );
+      }
+    });
+  }, [usedState]);
+
 
   return (
-    <div className={classes.meetingsList}>
+    <div className={classes.meetingsList} onScroll={onScroll} ref={myRef}>
       <Typography align="center" className={classes.availableMeetings}>
         Available meetings
       </Typography>
@@ -66,7 +104,13 @@ const MeetingsList = (props) => {
         value={searchState.searchInput}
         onChange={(event) => onSearchHandler(event)}
       />
-      {meetings}
+      {!meetingsAreLoading ? (
+        meetings
+      ) : (
+        <div className={classes.circularContainer}>
+          <CircularProgress />
+        </div>
+      )}
     </div>
   );
 };
