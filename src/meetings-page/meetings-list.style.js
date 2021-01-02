@@ -7,6 +7,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
 
+
     overflowX: 'hidden',
   },
   circularContainer: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   searchBar: {
     height: '2rem',

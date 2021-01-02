@@ -39,6 +39,7 @@ const useStyles = makeStyles({
       cursor: 'pointer',
     },
     borderRadius: '24px',
+
     background:
       'linear-gradient(-90deg, rgba(2, 62, 138, 0.2), rgba(2, 62, 138, 0.9))',
 

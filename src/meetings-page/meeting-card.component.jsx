@@ -1,3 +1,4 @@
+
 import React from 'react';
 import useStyles from './meeting-card.style';
 import PeopleIcon from '@material-ui/icons/People';
@@ -5,6 +6,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import { useTransition, animated } from 'react-spring';
+
 
 const MeetingCard = (props) => {
   const classes = useStyles();
@@ -15,14 +17,18 @@ const MeetingCard = (props) => {
       transform: `translate3d(${2 * props.index * 200}px,${
         (props.index - 1) * 100
       }px,0px)`,
+
       opacity: '0.3',
     },
     enter: { transform: `translate3d(0px,0,0)`, opacity: '1' },
+
     leave: {
       transform: `translate3d(${2 * props.index * -200}px,${
         (props.index - 1) * -200
       }px,0)`,
+
       opacity: '0.3',
+
     },
     config: {
       duration: 400,

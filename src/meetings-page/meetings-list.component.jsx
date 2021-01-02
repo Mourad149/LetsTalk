@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import useStyles from './meetings-list.style';
@@ -14,6 +15,7 @@ const MeetingsList = (props) => {
   const [meetings, setMeetings] = useState([]);
   const [usedState, setUsedState] = useState([]);
   const [searchState, setSearchState] = useState({ searchInput: '' });
+
   const [filteredMeetings, setFilteredMeetings] = useState([]);
   const [skip, setSkip] = useState(0);
   const [meetingsAreLoading, setMeetingsAreLoading] = useState(true);
@@ -38,6 +40,7 @@ const MeetingsList = (props) => {
       setSkip(usedState.length);
     }
   };
+
 
   useEffect(() => {
     axios
@@ -90,6 +93,7 @@ const MeetingsList = (props) => {
       }
     });
   }, [usedState]);
+
 
   return (
     <div className={classes.meetingsList} onScroll={onScroll} ref={myRef}>
