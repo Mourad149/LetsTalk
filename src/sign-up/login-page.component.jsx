@@ -17,6 +17,7 @@ const LoginPage = (props) => {
       duration: 700,
     },
   });
+  const { cookies } = props;
   return transitions.map(({ item, props, key }) => (
     <animated.div style={{ display: 'flex', width: '100%', ...props }}>
       <Grid container className={classes.page}>
@@ -26,7 +27,7 @@ const LoginPage = (props) => {
           </Typography>
         </Grid>
         <Grid item md={5} className={classes.gridItemContainer}>
-          <LoginForm />
+          <LoginForm cookies={cookies} />
         </Grid>
       </Grid>
     </animated.div>

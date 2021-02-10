@@ -8,10 +8,9 @@ import { useTransition, animated } from 'react-spring';
 import { useHistory } from 'react-router';
 const MeetingCard = (props) => {
   const classes = useStyles();
-  const history = useHistory();
   const [show, set] = React.useState(false);
   const redirect = (path) => {
-    return history.push(path);
+    return props.history.push(path);
   };
   const transitions = useTransition(show, (item) => item.key, {
     from: {

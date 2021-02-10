@@ -140,6 +140,7 @@ const SignUpForm = (props) => {
       currentPosition: '',
       age: '',
       mail: '',
+      userType: props.userType,
     };
     for (const key in state.fields) {
       obj[key] = state.fields[key].value;
@@ -165,7 +166,7 @@ const SignUpForm = (props) => {
     if (checkingValidity() && state.firstCheck === false) {
       const userObject = buildObject();
       axios
-        .put(
+        .post(
           `https://${process.env.REACT_APP_BASE_URL}:5000/signup`,
           userObject
         )
@@ -240,9 +241,5 @@ const SignUpForm = (props) => {
     </animated.div>
   ));
 };
-const mapStateToProps = (state) => {
-  return {
-    notifReducer: state.notifReducer,
-  };
-};
-export default connect(mapStateToProps, { fireNotif })(SignUpForm);
+
+export default connect(null, { fireNotif })(SignUpForm);

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import useStyles from './meetings-list.style';
@@ -41,7 +40,6 @@ const MeetingsList = (props) => {
     }
   };
 
-
   useEffect(() => {
     axios
       .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${skip}`)
@@ -78,6 +76,7 @@ const MeetingsList = (props) => {
               participants={item.participants}
               startTimeStamps={item.startTimeStamps}
               index={index + 1}
+              {...props}
             />
           );
         });
@@ -93,7 +92,6 @@ const MeetingsList = (props) => {
       }
     });
   }, [usedState]);
-
 
   return (
     <div className={classes.meetingsList} onScroll={onScroll} ref={myRef}>

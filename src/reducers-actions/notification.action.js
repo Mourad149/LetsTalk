@@ -4,3 +4,9 @@ export const fireNotif = (value) => (dispatch) => {
     payload: value,
   });
 };
+export const closeNotif = (value) => (dispatch) => {
+  return dispatch({
+    type: 'CLOSE-NOTIF',
+    payload: value,
+  });
+};
