@@ -42,7 +42,7 @@ const MeetingsPage = (props) => {
         </div>
       </Grid>
       <Grid md={9} item className={classes.gridItemContainer}>
-        <MeetingsList {...props} />
+        <MeetingsList {...props} cookies={props.cookies} />
       </Grid>
       <CreateMeetingModal cssClass={modalClassName} hideModal={hideModal} />
     </Grid>

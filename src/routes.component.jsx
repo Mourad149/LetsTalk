@@ -8,7 +8,13 @@ import LayoutComponent from './layout/layout.component';
 import HomePageComponent from './home-page/home-page.component';
 import AlertComponent from './utils/alert.component';
 import { withCookies } from 'react-cookie';
+import withAuth from './utils/withAuth';
 
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUserReducer,
+  };
+};
 function RoutesComponent(props) {
   return (
     <Switch>
@@ -23,7 +29,13 @@ function RoutesComponent(props) {
       <Route
         exact
         path="/meetings/:anonym/:isAdmin/:userId"
-        render={(props) => <MeetingPage {...props} />}
+        render={(injectedProps) => {
+          const Authenticated = withAuth(
+            () => <MeetingPage {...injectedProps} cookies={props.cookies} />,
+            props.cookies.get('token')
+          );
+          return <Authenticated {...props} />;
+        }}
       />
 
       <Route exact path="/signUp">

@@ -19,6 +19,7 @@ const MeetingsList = (props) => {
   const [skip, setSkip] = useState(0);
   const [meetingsAreLoading, setMeetingsAreLoading] = useState(true);
   const myRef = useRef();
+  const { cookies } = props;
   const onSearchHandler = (event) => {
     setSearchState({ searchInput: event.target.value });
     filterMeetingsFunc(event.target.value);
@@ -42,11 +43,16 @@ const MeetingsList = (props) => {
 
   useEffect(() => {
     axios
-      .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${skip}`)
+      .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${skip}`, {
+        headers: {
+          Authorization: `Bearer ${cookies.get('token')}`,
+        },
+      })
       .then((res) => {
+        console.log(res);
+
         setUsedState((prevState) => [...prevState, ...res.data.meetings]);
         setMeetingsAreLoading(false);
-        console.log(res);
       })
       .catch((err) => console.log(err));
   }, [skip]);
@@ -55,10 +61,15 @@ const MeetingsList = (props) => {
       setUsedState([...filteredMeetings]);
     } else {
       axios
-        .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${0}`)
+        .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${0}`, {
+          headers: {
+            Authorization: `Bearer ${cookies.get('token')}`,
+          },
+        })
         .then((res) => {
-          setUsedState((prevState) => [...res.data.meetings]);
           console.log(res);
+
+          setUsedState((prevState) => [...res.data.meetings]);
         })
         .catch((err) => console.log(err));
     }
