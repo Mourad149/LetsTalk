@@ -7,6 +7,7 @@ import { Typography } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import BackdropComponent from '../utils/backdrop.component';
 import { CircularProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 const MeetingsList = (props) => {
   const classes = useStyles();
@@ -86,6 +87,8 @@ const MeetingsList = (props) => {
               theme={item.theme}
               participants={item.participants}
               startTimeStamps={item.startTimeStamps}
+              meetingId={item._id}
+              currentUserId={props.currentUserReducer._id}
               index={index + 1}
               {...props}
             />
@@ -123,4 +126,9 @@ const MeetingsList = (props) => {
     </div>
   );
 };
-export default MeetingsList;
+const mapStateToProps = (state) => {
+  return {
+    currentUserReducer: state.currentUserReducer,
+  };
+};
+export default connect(mapStateToProps)(MeetingsList);

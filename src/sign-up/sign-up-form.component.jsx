@@ -7,6 +7,8 @@ import { Typography, Button } from '@material-ui/core';
 import { useTransition, animated } from 'react-spring';
 import { connect } from 'react-redux';
 import { fireNotif } from '../reducers-actions/notification.action';
+import Resizer from 'react-image-file-resizer';
+
 const SignUpForm = (props) => {
   const classes = useStyles();
   const [show, set] = useState(false);
@@ -57,6 +59,14 @@ const SignUpForm = (props) => {
           if (res === false || val > 90) {
             return 'Invalid age !';
           }
+          return null;
+        },
+        error: null,
+      },
+      image: {
+        placeholder: 'Image',
+        value: '',
+        validator: () => {
           return null;
         },
         error: null,
@@ -125,13 +135,36 @@ const SignUpForm = (props) => {
   const onChangeHandler = (event, fieldId) => {
     const copiedState = { ...state.fields };
     const updatedFormElement = { ...copiedState[fieldId] };
+
     updatedFormElement.value = event.target.value;
     const customError = updatedFormElement.validator(updatedFormElement.value);
     updatedFormElement.error = customError;
     copiedState[fieldId] = updatedFormElement;
     setState({ ...state, fields: copiedState, firstCheck: false });
   };
+  const imageOnChangeHandler = (event, fieldId) => {
+    console.log(event.target.files, event.target.files[0]);
+    Resizer.imageFileResizer(
+      event.target.files[0],
+      200,
+      200,
+      'JPEG',
+      20,
+      0,
+      (uri) => {
+        const copiedState = { ...state.fields };
+        const updatedFormElement = { ...copiedState[fieldId] };
 
+        updatedFormElement.value = uri;
+        const customError = updatedFormElement.validator(
+          updatedFormElement.value
+        );
+        updatedFormElement.error = customError;
+        copiedState[fieldId] = updatedFormElement;
+        setState({ ...state, fields: copiedState, firstCheck: false });
+      }
+    );
+  };
   const buildObject = () => {
     const obj = {
       firstName: '',
@@ -140,6 +173,7 @@ const SignUpForm = (props) => {
       currentPosition: '',
       age: '',
       mail: '',
+      image: '',
       userType: props.userType,
     };
     for (const key in state.fields) {
@@ -201,16 +235,22 @@ const SignUpForm = (props) => {
     let type = 'text';
     if (input.config.placeholder === 'Password') {
       type = 'password';
+    } else if (input.config.placeholder === 'Image') {
+      type = 'file';
     }
     return (
       <CustomInput
         key={input.id}
         type={type}
-        value={input.config.value}
+        value={input.id === 'image' ? null : input.config.value}
         placeholder={input.config.placeholder}
-        onChange={(event) => {
-          onChangeHandler(event, input.id);
-        }}
+        onChange={
+          input.id === 'image'
+            ? (e) => imageOnChangeHandler(e, input.id)
+            : (event) => {
+                onChangeHandler(event, input.id);
+              }
+        }
         error={input.config.error}
       />
     );

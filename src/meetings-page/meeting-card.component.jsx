@@ -47,7 +47,13 @@ const MeetingCard = (props) => {
         Starts {props.startTimeStamps}
       </Typography>
       <div
-        onClick={() => redirect(`/meetings/${true}/${false}/2/1`)}
+        onClick={() =>
+          redirect(
+            `/meetings/${true}/${false}/${props.currentUserId}/${
+              props.meetingId
+            }`
+          )
+        }
         className={classes.joinBox}
       >
         <ArrowForwardIosIcon />
@@ -55,4 +61,5 @@ const MeetingCard = (props) => {
     </animated.div>
   ));
 };
+
 export default MeetingCard;

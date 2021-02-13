@@ -10,7 +10,9 @@ function MessageAvatarComponent(props) {
           ? classes.messageAvatarRight
           : classes.messageAvatarLeft
       }
+      src={props.userPdp}
     />
   );
 }
+
 export default MessageAvatarComponent;

@@ -21,9 +21,9 @@ function RoutesComponent(props) {
       <Route
         path="/meetings/:anonym/:isAdmin/:userId/:meetingId"
         exact
-        render={(props) => [
-          <ChatViewComponent {...props} />,
-          <AlertComponent {...props} />,
+        render={(injectedProps) => [
+          <ChatViewComponent {...injectedProps} cookies={props.cookies} />,
+          <AlertComponent {...injectedProps} />,
         ]}
       ></Route>
       <Route

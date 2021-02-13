@@ -12,6 +12,7 @@ function MessageComponent(props) {
         currentUser={props.currentUser}
         message={props.message}
         userRole={props.userRole}
+        userPdp={props.userPdp}
       />
     </div>
   );

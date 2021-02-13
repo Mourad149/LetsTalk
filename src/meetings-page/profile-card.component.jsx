@@ -59,7 +59,7 @@ const ProfileCard = (props) => {
       </animated.div>
     ) : (
       <animated.div className={classes.profileCard} style={style}>
-        <Avatar className={classes.avatar} />
+        <Avatar className={classes.avatar} src={props.currentUser?.image} />
         <Typography className={classes.name} align="center">
           {props.currentUser?.firstName + ' ' + props.currentUser?.lastName}{' '}
         </Typography>

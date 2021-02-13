@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 import HasRaisedHandComponent from './has-raised-hand.component';
 import dotenv from 'dotenv';
-
+import axios from 'axios';
 let socket = io.connect(
   `https://${process.env.REACT_APP_BASE_URL}:5000/messaging`,
   {
@@ -22,6 +22,23 @@ function MessagingComponent(props) {
   const [message, setMessage] = React.useState('');
   const [messages, setMessages] = React.useState([]);
   const [userId, setUserId] = React.useState(props.userId);
+
+  React.useEffect(() => {
+    axios
+      .get(
+        `https://${process.env.REACT_APP_BASE_URL}:5000/getMessages/${props.room}`,
+        {
+          headers: {
+            Authorization: `Bearer ${props.cookies.get('token')}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setMessages(res.data[0].messages);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   React.useEffect(() => {
     socket.emit('join', { room: props.room, userId: userId });
 
@@ -40,6 +57,9 @@ function MessagingComponent(props) {
       message: message,
       senderId: userId,
       userRole: props.userRole,
+      meetingId: props.room,
+      userPdp: props.currentUserObject?.image,
+      userRole: props.currentUserObject?.userType,
     });
   };
   return (
@@ -51,18 +71,20 @@ function MessagingComponent(props) {
             return (
               <MessageComponent
                 hasRaisedHandComponent={data.raiseHandComponent}
-                message={data.message}
-                currentUser={userId === data.senderId ? true : false}
-                userRole={data.userRole}
+                message={data.text}
+                currentUser={userId === data.senderCred.userId ? true : false}
+                userRole={data.senderCred.userRole}
+                userPdp={data.senderCred.image}
                 key={uuidv4()}
               />
             );
           else {
             return (
               <MessageComponent
-                message={data.message}
-                currentUser={userId === data.senderId ? true : false}
+                message={data.text}
+                currentUser={userId === data.senderCred.userId ? true : false}
                 key={uuidv4()}
+                userPdp={data.senderCred.image}
               />
             );
           }

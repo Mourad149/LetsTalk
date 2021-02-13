@@ -4,6 +4,7 @@ import MessagingComponent from './messaging-component/messaging.component';
 import useStyles from './chat-view.style';
 import VoiceChatComponent from './voice-chat-component/voice-chat.component';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
 import io from 'socket.io-client';
 function ChatViewComponent(props) {
   const classes = useStyles();
@@ -24,9 +25,16 @@ function ChatViewComponent(props) {
           room={props.match.params.meetingId}
           userId={userId}
           userRole={userRole}
+          currentUserObject={props.currentUserReducer}
+          cookies={props.cookies}
         />
       </Grid>
     </Grid>
   );
 }
-export default ChatViewComponent;
+const mapStateToProps = (state) => {
+  return {
+    currentUserReducer: state.currentUserReducer,
+  };
+};
+export default connect(mapStateToProps)(ChatViewComponent);
