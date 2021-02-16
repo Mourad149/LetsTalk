@@ -2,11 +2,14 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import useStyles from './home-page.style';
 import { useTransition, animated } from 'react-spring';
-import { Link } from 'react-router-dom';
+import { div } from 'react-router-dom';
 import AnonymousLogoComponent from '../assets/anonymous-logo.component';
+import { useHistory } from 'react-router';
 function HomePageComponent() {
   const classes = useStyles();
   const [show, set] = React.useState(false);
+  const history = useHistory();
+
   const transitions = useTransition(show, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -15,6 +18,10 @@ function HomePageComponent() {
       duration: 700,
     },
   });
+  const redirect = (path) => {
+    return history.push(path);
+  };
+
   return transitions.map(({ item, props, key }) => (
     <animated.div
       style={{
@@ -32,35 +39,39 @@ function HomePageComponent() {
       </Typography>
       <div className={classes.primaryButtonsContainer}>
         <div className={classes.buttonsContainer}>
-          <Link
+          <div
             className={classes.homePageButton}
             style={{ textDecoration: 'none' }}
-            to="/signup"
+            onClick={() => redirect('/signup')}
+
           >
             <Typography className={classes.buttonText} align="center">
               Subscribe
             </Typography>
-          </Link>
-          <Link
+          </div>
+          <div
             className={classes.homePageButton}
             style={{ textDecoration: 'none' }}
-            to="/login"
+            onClick={() => redirect('/login')}
+
           >
             <Typography className={classes.buttonText} align="center">
               Login
             </Typography>
-          </Link>
+          </div>
         </div>
-        <Link
+        <div
           className={classes.joinAnonymButton}
           style={{ textDecoration: 'none' }}
-          to={`/meetings/${true}/${false}/${2}`}
+          onClick={() => redirect(`/meetings/${true}/${false}/${2}`)}
+
         >
           <AnonymousLogoComponent />
           <Typography className={classes.anonymButtonText} align="center">
             Or join meetings anonymously
           </Typography>
-        </Link>
+        </div>
+
       </div>
     </animated.div>
   ));

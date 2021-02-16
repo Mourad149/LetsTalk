@@ -8,6 +8,9 @@ import dotenv from 'dotenv';
 import { toast, ToastContainer } from 'react-toastify';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import { Typography } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { fireNotif } from '../../reducers-actions/notification.action';
+
 let socket = io.connect(
   `https://${process.env.REACT_APP_BASE_URL}:5000/messaging`,
   {
@@ -36,17 +39,16 @@ function VoiceChatComponent(props) {
   }, []);
   React.useEffect(() => {
     socket.on('user-connected', (data) => {
-      toast(
-        <div className={classes.toastBody}>
-          <NewReleasesIcon className={classes.toastIcon} />
-          <Typography>User has joined the meeting</Typography>{' '}
-        </div>,
-        {
-          className: classes.toastNotification,
-          bodyClassName: 'grow-font-size',
-          progressClassName: 'fancy-progress-bar',
-        }
-      );
+      props.fireNotif({
+        component: (
+          <div className={classes.toastBody}>
+            <NewReleasesIcon className={classes.toastIcon} />
+            <Typography>User has joined the meeting</Typography>{' '}
+          </div>
+        ),
+        open: true,
+      });
+
       navigator.mediaDevices
         .getUserMedia(
           // Only request audio
@@ -80,18 +82,8 @@ function VoiceChatComponent(props) {
           userRole={props.userRole}
         />
       </div>
-      <ToastContainer
-        position="top-left"
-        autoClose={5000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </div>
   );
 }
-export default VoiceChatComponent;
+export default connect(null, { fireNotif })(VoiceChatComponent);
+

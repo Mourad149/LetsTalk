@@ -58,15 +58,14 @@ const ProfileCard = (props) => {
         </Typography>
       </animated.div>
     ) : (
-
       <animated.div className={classes.profileCard} style={style}>
-
-        <Avatar className={classes.avatar} />
+        <Avatar className={classes.avatar} src={props.currentUser?.image} />
         <Typography className={classes.name} align="center">
-          Zakaria Azziz
+          {props.currentUser?.firstName + ' ' + props.currentUser?.lastName}{' '}
         </Typography>
         <Typography className={classes.pseudo} align="center">
-          TheRedHacker
+          {props.currentUser?.currentPosition}
+
         </Typography>
         <Typography className={classes.description}>
           Actuellement étudiant en 3ème année à l’Ecole Nationale Supérieur

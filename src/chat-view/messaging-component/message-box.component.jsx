@@ -15,7 +15,11 @@ function MessageBoxComponent(props) {
           : classes.messageLeftContainer
       }
     >
-      <MessageAvatarComponent currentUser={props.currentUser} />
+      <MessageAvatarComponent
+        currentUser={props.currentUser}
+        userPdp={props.userPdp}
+      />
+
       <Typography
         align={props.currentUser ? 'right' : 'left'}
         className={

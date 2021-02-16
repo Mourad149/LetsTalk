@@ -63,6 +63,8 @@ const useStyles = makeStyles({
       backgroundColor: 'white',
       opacity: '0.4',
       color: '#023e8a',
+      cursor: 'pointer',
+
     },
     borderRadius: '0 24px 24px 0',
     borderLeft: '1px solid white',

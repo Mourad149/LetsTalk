@@ -5,6 +5,10 @@ import useStyles from './sign-up.style';
 import CustomInput from './custom-input.component';
 import { Typography, Button } from '@material-ui/core';
 import { useTransition, animated } from 'react-spring';
+import { connect } from 'react-redux';
+import { fireNotif } from '../reducers-actions/notification.action';
+import Resizer from 'react-image-file-resizer';
+
 
 const SignUpForm = (props) => {
   const classes = useStyles();
@@ -60,6 +64,15 @@ const SignUpForm = (props) => {
         },
         error: null,
       },
+      image: {
+        placeholder: 'Image',
+        value: '',
+        validator: () => {
+          return null;
+        },
+        error: null,
+      },
+
       country: {
         placeholder: 'Country',
         value: '',
@@ -124,11 +137,35 @@ const SignUpForm = (props) => {
   const onChangeHandler = (event, fieldId) => {
     const copiedState = { ...state.fields };
     const updatedFormElement = { ...copiedState[fieldId] };
+
     updatedFormElement.value = event.target.value;
     const customError = updatedFormElement.validator(updatedFormElement.value);
     updatedFormElement.error = customError;
     copiedState[fieldId] = updatedFormElement;
     setState({ ...state, fields: copiedState, firstCheck: false });
+  };
+  const imageOnChangeHandler = (event, fieldId) => {
+    console.log(event.target.files, event.target.files[0]);
+    Resizer.imageFileResizer(
+      event.target.files[0],
+      200,
+      200,
+      'JPEG',
+      20,
+      0,
+      (uri) => {
+        const copiedState = { ...state.fields };
+        const updatedFormElement = { ...copiedState[fieldId] };
+
+        updatedFormElement.value = uri;
+        const customError = updatedFormElement.validator(
+          updatedFormElement.value
+        );
+        updatedFormElement.error = customError;
+        copiedState[fieldId] = updatedFormElement;
+        setState({ ...state, fields: copiedState, firstCheck: false });
+      }
+    );
   };
 
   const buildObject = () => {
@@ -139,6 +176,9 @@ const SignUpForm = (props) => {
       currentPosition: '',
       age: '',
       mail: '',
+      image: '',
+      userType: props.userType,
+
     };
     for (const key in state.fields) {
       obj[key] = state.fields[key].value;
@@ -147,7 +187,8 @@ const SignUpForm = (props) => {
   };
 
   const checkingValidity = () => {
-    // Testing if there is any error in order to save the form
+    //  Testing if there is any error in order to save the form
+
     let formValidity = true;
     for (const key in state.fields) {
       if (state.fields[key].error !== null) {
@@ -159,12 +200,15 @@ const SignUpForm = (props) => {
   };
 
   const submitForm = (event) => {
+    props.fireNotif(true);
+
     event.preventDefault();
     if (checkingValidity() && state.firstCheck === false) {
       const userObject = buildObject();
       axios
         .post(
-          'https://react-20805.firebaseio.com/' + props.userType + '.json',
+          `https://${process.env.REACT_APP_BASE_URL}:5000/signup`,
+
           userObject
         )
         .then((res) => {
@@ -198,16 +242,24 @@ const SignUpForm = (props) => {
     let type = 'text';
     if (input.config.placeholder === 'Password') {
       type = 'password';
+    } else if (input.config.placeholder === 'Image') {
+      type = 'file';
+
     }
     return (
       <CustomInput
         key={input.id}
         type={type}
-        value={input.config.value}
+        value={input.id === 'image' ? null : input.config.value}
         placeholder={input.config.placeholder}
-        onChange={(event) => {
-          onChangeHandler(event, input.id);
-        }}
+        onChange={
+          input.id === 'image'
+            ? (e) => imageOnChangeHandler(e, input.id)
+            : (event) => {
+                onChangeHandler(event, input.id);
+              }
+        }
+
         error={input.config.error}
       />
     );
@@ -239,4 +291,5 @@ const SignUpForm = (props) => {
   ));
 };
 
-export default SignUpForm;
+export default connect(null, { fireNotif })(SignUpForm);
+

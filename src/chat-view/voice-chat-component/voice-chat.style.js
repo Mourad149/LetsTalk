@@ -59,11 +59,8 @@ const useStyles = makeStyles({
     width: participantAvatarWidth,
     height: participantAvatarHeight,
   },
-  toastNotification: {
-    height: '3rem',
-    borderRadius: '24px',
-    padding: '15px',
-  },
+
+
   toastBody: {
     display: 'flex',
     alignItems: 'center',

@@ -1,34 +1,42 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import useStyles from "./sign-up.style";
-import CustomInput from "./custom-input.component";
-import { Typography, Button } from "@material-ui/core";
-import { useTransition, animated } from "react-spring";
+import useStyles from './sign-up.style';
+import CustomInput from './custom-input.component';
+import { Typography, Button } from '@material-ui/core';
+import { useTransition, animated } from 'react-spring';
+import { loadCurrentUser } from '../reducers-actions/current-user.action';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
+
 
 const SignUpForm = (props) => {
   const classes = useStyles();
   const [show, set] = useState(false);
+  const history = useHistory();
+
 
   const [state, setState] = useState({
     fields: {
       mail: {
-        placeholder: "Email",
-        value: "",
+        placeholder: 'Email',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Make sure to enter your email !";
+            return 'Make sure to enter your email !';
+
           }
           return null;
         },
         error: null,
       },
       password: {
-        placeholder: "Password",
-        value: "",
+        placeholder: 'Password',
+        value: '',
         validator: (val) => {
           if (val.length === 0) {
-            return "Make sure to enter your password !";
+            return 'Make sure to enter your password !';
+
           }
         },
         error: null,
@@ -36,6 +44,9 @@ const SignUpForm = (props) => {
     },
     firstCheck: true,
   });
+  const redirect = (path) => {
+    return history.push(path);
+  };
 
   const onChangeHandler = (event, fieldId) => {
     const copiedState = { ...state.fields };
@@ -49,8 +60,9 @@ const SignUpForm = (props) => {
 
   const buildObject = () => {
     const obj = {
-      mail: "",
-      password: "",
+      mail: '',
+      password: '',
+
     };
     for (const key in state.fields) {
       obj[key] = state.fields[key].value;
@@ -72,21 +84,26 @@ const SignUpForm = (props) => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    if (checkingValidity() && state.firstCheck === false) {
-      const loginObject = buildObject();
-      //   axios
-      //     .post(
-      //       'https://react-20805.firebaseio.com/' + props.userType + '.json',
-      //       userObject
-      //     )
-      //     .then((res) => {
-      //       console.log(res);
-      //     })
-      //     .catch((err) => console.log(err));
-      console.log(loginObject);
-    } else {
-      renderingErrors();
-    }
+    // if (checkingValidity() && state.firstCheck === false) {
+    const loginObject = buildObject();
+
+    axios
+      .post(`https://${process.env.REACT_APP_BASE_URL}:5000/login`, loginObject)
+      .then((res) => {
+        props.loadCurrentUser(res.data.currentUser);
+        props.cookies.set('token', res.data.token, { path: '/' });
+        redirect(
+          res.data.currentUser.userType === 'participant'
+            ? `/meetings/${false}/${false}/${res.data.currentUser._id}`
+            : `/meetings/${false}/${true}/${res.data.currentUser._id}`
+        );
+      })
+      .catch((err) => console.log(err));
+    console.log(loginObject);
+    // } else {
+    //   renderingErrors();
+    // }
+
   };
 
   const renderingErrors = () => {
@@ -108,9 +125,10 @@ const SignUpForm = (props) => {
     formFieldsArray.push({ id: key, config: state.fields[key] });
   }
   const inputs = formFieldsArray.map((input) => {
-    let type = "text";
-    if (input.config.placeholder === "Password") {
-      type = "password";
+    let type = 'text';
+    if (input.config.placeholder === 'Password') {
+      type = 'password';
+
     }
     return (
       <CustomInput
@@ -126,25 +144,27 @@ const SignUpForm = (props) => {
     );
   });
   const transitions = useTransition(show, null, {
-    from: { transform: `translate3d(400px,0,0)`, opacity: "0" },
+    from: { transform: `translate3d(400px,0,0)`, opacity: '0' },
     enter: {
       transform: `translate3d(0px,0,0)`,
-      opacity: "1",
-      transition: "opacity 0.3s",
+      opacity: '1',
+      transition: 'opacity 0.3s',
     },
-    leave: { transform: `translate3d(-400px,0,0)`, opacity: "0" },
+    leave: { transform: `translate3d(-400px,0,0)`, opacity: '0' },
+
     config: {
       duration: 500,
     },
   });
   return transitions.map(({ item, key, props: style }) => (
-    <animated.div style={{ width: "80%", ...style }}>
+    <animated.div style={{ width: '80%', ...style }}>
       <Typography className={classes.formBanner} align="center" paragraph>
         Login
       </Typography>
-      <form onSubmit={submitForm} className={classes.form}>
+      <form className={classes.form}>
         {inputs}
-        <Button type="submit" className={classes.submitBtn}>
+        <Button onClick={submitForm} className={classes.submitBtn}>
+
           <Typography className={classes.submitButtonText}>Login</Typography>
         </Button>
       </form>
@@ -152,4 +172,5 @@ const SignUpForm = (props) => {
   ));
 };
 
-export default SignUpForm;
+export default connect(null, { loadCurrentUser })(SignUpForm);
+

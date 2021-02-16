@@ -6,11 +6,13 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import { useTransition, animated } from 'react-spring';
-
-
+import { useHistory } from 'react-router';
 const MeetingCard = (props) => {
   const classes = useStyles();
   const [show, set] = React.useState(false);
+  const redirect = (path) => {
+    return props.history.push(path);
+  };
 
   const transitions = useTransition(show, (item) => item.key, {
     from: {
@@ -47,10 +49,21 @@ const MeetingCard = (props) => {
       <Typography className={classes.startBox}>
         Starts {props.startTimeStamps}
       </Typography>
-      <Link to={`/meetings/${true}/${false}/2/1`} className={classes.joinBox}>
+      <div
+        onClick={() =>
+          redirect(
+            `/meetings/${true}/${false}/${props.currentUserId}/${
+              props.meetingId
+            }`
+          )
+        }
+        className={classes.joinBox}
+      >
         <ArrowForwardIosIcon />
-      </Link>
+      </div>
     </animated.div>
   ));
 };
+
+
 export default MeetingCard;
