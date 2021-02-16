@@ -9,6 +9,7 @@ function HomePageComponent() {
   const classes = useStyles();
   const [show, set] = React.useState(false);
   const history = useHistory();
+
   const transitions = useTransition(show, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -20,6 +21,7 @@ function HomePageComponent() {
   const redirect = (path) => {
     return history.push(path);
   };
+
   return transitions.map(({ item, props, key }) => (
     <animated.div
       style={{
@@ -41,6 +43,7 @@ function HomePageComponent() {
             className={classes.homePageButton}
             style={{ textDecoration: 'none' }}
             onClick={() => redirect('/signup')}
+
           >
             <Typography className={classes.buttonText} align="center">
               Subscribe
@@ -50,6 +53,7 @@ function HomePageComponent() {
             className={classes.homePageButton}
             style={{ textDecoration: 'none' }}
             onClick={() => redirect('/login')}
+
           >
             <Typography className={classes.buttonText} align="center">
               Login
@@ -60,12 +64,14 @@ function HomePageComponent() {
           className={classes.joinAnonymButton}
           style={{ textDecoration: 'none' }}
           onClick={() => redirect(`/meetings/${true}/${false}/${2}`)}
+
         >
           <AnonymousLogoComponent />
           <Typography className={classes.anonymButtonText} align="center">
             Or join meetings anonymously
           </Typography>
         </div>
+
       </div>
     </animated.div>
   ));

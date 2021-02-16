@@ -19,6 +19,7 @@ function MessageBoxComponent(props) {
         currentUser={props.currentUser}
         userPdp={props.userPdp}
       />
+
       <Typography
         align={props.currentUser ? 'right' : 'left'}
         className={

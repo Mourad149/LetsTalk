@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import HasRaisedHandComponent from './has-raised-hand.component';
 import dotenv from 'dotenv';
 import axios from 'axios';
+
 let socket = io.connect(
   `https://${process.env.REACT_APP_BASE_URL}:5000/messaging`,
   {
@@ -39,6 +40,7 @@ function MessagingComponent(props) {
       })
       .catch((err) => console.log(err));
   }, []);
+
   React.useEffect(() => {
     socket.emit('join', { room: props.room, userId: userId });
 
@@ -60,6 +62,7 @@ function MessagingComponent(props) {
       meetingId: props.room,
       userPdp: props.currentUserObject?.image,
       userRole: props.currentUserObject?.userType,
+
     });
   };
   return (
@@ -75,6 +78,7 @@ function MessagingComponent(props) {
                 currentUser={userId === data.senderCred.userId ? true : false}
                 userRole={data.senderCred.userRole}
                 userPdp={data.senderCred.image}
+
                 key={uuidv4()}
               />
             );

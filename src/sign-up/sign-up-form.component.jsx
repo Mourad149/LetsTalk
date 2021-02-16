@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { fireNotif } from '../reducers-actions/notification.action';
 import Resizer from 'react-image-file-resizer';
 
+
 const SignUpForm = (props) => {
   const classes = useStyles();
   const [show, set] = useState(false);
@@ -71,6 +72,7 @@ const SignUpForm = (props) => {
         },
         error: null,
       },
+
       country: {
         placeholder: 'Country',
         value: '',
@@ -165,6 +167,7 @@ const SignUpForm = (props) => {
       }
     );
   };
+
   const buildObject = () => {
     const obj = {
       firstName: '',
@@ -175,6 +178,7 @@ const SignUpForm = (props) => {
       mail: '',
       image: '',
       userType: props.userType,
+
     };
     for (const key in state.fields) {
       obj[key] = state.fields[key].value;
@@ -184,6 +188,7 @@ const SignUpForm = (props) => {
 
   const checkingValidity = () => {
     //  Testing if there is any error in order to save the form
+
     let formValidity = true;
     for (const key in state.fields) {
       if (state.fields[key].error !== null) {
@@ -196,12 +201,14 @@ const SignUpForm = (props) => {
 
   const submitForm = (event) => {
     props.fireNotif(true);
+
     event.preventDefault();
     if (checkingValidity() && state.firstCheck === false) {
       const userObject = buildObject();
       axios
         .post(
           `https://${process.env.REACT_APP_BASE_URL}:5000/signup`,
+
           userObject
         )
         .then((res) => {
@@ -237,6 +244,7 @@ const SignUpForm = (props) => {
       type = 'password';
     } else if (input.config.placeholder === 'Image') {
       type = 'file';
+
     }
     return (
       <CustomInput
@@ -251,6 +259,7 @@ const SignUpForm = (props) => {
                 onChangeHandler(event, input.id);
               }
         }
+
         error={input.config.error}
       />
     );
@@ -283,3 +292,4 @@ const SignUpForm = (props) => {
 };
 
 export default connect(null, { fireNotif })(SignUpForm);
+

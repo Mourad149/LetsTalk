@@ -9,10 +9,12 @@ import { loadCurrentUser } from '../reducers-actions/current-user.action';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
+
 const SignUpForm = (props) => {
   const classes = useStyles();
   const [show, set] = useState(false);
   const history = useHistory();
+
 
   const [state, setState] = useState({
     fields: {
@@ -22,6 +24,7 @@ const SignUpForm = (props) => {
         validator: (val) => {
           if (val.length === 0) {
             return 'Make sure to enter your email !';
+
           }
           return null;
         },
@@ -33,6 +36,7 @@ const SignUpForm = (props) => {
         validator: (val) => {
           if (val.length === 0) {
             return 'Make sure to enter your password !';
+
           }
         },
         error: null,
@@ -43,6 +47,7 @@ const SignUpForm = (props) => {
   const redirect = (path) => {
     return history.push(path);
   };
+
   const onChangeHandler = (event, fieldId) => {
     const copiedState = { ...state.fields };
     const updatedFormElement = { ...copiedState[fieldId] };
@@ -57,6 +62,7 @@ const SignUpForm = (props) => {
     const obj = {
       mail: '',
       password: '',
+
     };
     for (const key in state.fields) {
       obj[key] = state.fields[key].value;
@@ -97,6 +103,7 @@ const SignUpForm = (props) => {
     // } else {
     //   renderingErrors();
     // }
+
   };
 
   const renderingErrors = () => {
@@ -121,6 +128,7 @@ const SignUpForm = (props) => {
     let type = 'text';
     if (input.config.placeholder === 'Password') {
       type = 'password';
+
     }
     return (
       <CustomInput
@@ -143,6 +151,7 @@ const SignUpForm = (props) => {
       transition: 'opacity 0.3s',
     },
     leave: { transform: `translate3d(-400px,0,0)`, opacity: '0' },
+
     config: {
       duration: 500,
     },
@@ -155,6 +164,7 @@ const SignUpForm = (props) => {
       <form className={classes.form}>
         {inputs}
         <Button onClick={submitForm} className={classes.submitBtn}>
+
           <Typography className={classes.submitButtonText}>Login</Typography>
         </Button>
       </form>
@@ -163,3 +173,4 @@ const SignUpForm = (props) => {
 };
 
 export default connect(null, { loadCurrentUser })(SignUpForm);
+

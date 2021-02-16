@@ -1,3 +1,4 @@
+
 import React from 'react';
 import useStyles from './meeting-card.style';
 import PeopleIcon from '@material-ui/icons/People';
@@ -12,6 +13,7 @@ const MeetingCard = (props) => {
   const redirect = (path) => {
     return props.history.push(path);
   };
+
   const transitions = useTransition(show, (item) => item.key, {
     from: {
       transform: `translate3d(${2 * props.index * 200}px,${
@@ -28,6 +30,7 @@ const MeetingCard = (props) => {
       }px,0)`,
 
       opacity: '0.3',
+
     },
     config: {
       duration: 400,
@@ -61,5 +64,6 @@ const MeetingCard = (props) => {
     </animated.div>
   ));
 };
+
 
 export default MeetingCard;

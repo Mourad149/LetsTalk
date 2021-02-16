@@ -65,6 +65,7 @@ const ProfileCard = (props) => {
         </Typography>
         <Typography className={classes.pseudo} align="center">
           {props.currentUser?.currentPosition}
+
         </Typography>
         <Typography className={classes.description}>
           Actuellement étudiant en 3ème année à l’Ecole Nationale Supérieur

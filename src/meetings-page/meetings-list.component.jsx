@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import useStyles from './meetings-list.style';
@@ -7,7 +8,9 @@ import { Typography } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import BackdropComponent from '../utils/backdrop.component';
 import { CircularProgress } from '@material-ui/core';
+<<<<<< ReducerSetup
 import { connect } from 'react-redux';
+
 
 const MeetingsList = (props) => {
   const classes = useStyles();
@@ -21,6 +24,7 @@ const MeetingsList = (props) => {
   const [meetingsAreLoading, setMeetingsAreLoading] = useState(true);
   const myRef = useRef();
   const { cookies } = props;
+
   const onSearchHandler = (event) => {
     setSearchState({ searchInput: event.target.value });
     filterMeetingsFunc(event.target.value);
@@ -54,6 +58,7 @@ const MeetingsList = (props) => {
 
         setUsedState((prevState) => [...prevState, ...res.data.meetings]);
         setMeetingsAreLoading(false);
+
       })
       .catch((err) => console.log(err));
   }, [skip]);
@@ -71,6 +76,7 @@ const MeetingsList = (props) => {
           console.log(res);
 
           setUsedState((prevState) => [...res.data.meetings]);
+
         })
         .catch((err) => console.log(err));
     }
@@ -91,6 +97,7 @@ const MeetingsList = (props) => {
               currentUserId={props.currentUserReducer._id}
               index={index + 1}
               {...props}
+
             />
           );
         });
@@ -106,6 +113,7 @@ const MeetingsList = (props) => {
       }
     });
   }, [usedState]);
+
 
   return (
     <div className={classes.meetingsList} onScroll={onScroll} ref={myRef}>
@@ -132,3 +140,4 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps)(MeetingsList);
+

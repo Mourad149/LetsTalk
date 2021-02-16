@@ -36,6 +36,7 @@ const MeetingsPage = (props) => {
           isAdmin={props.match.params.isAdmin}
           showModal={() => showModal()}
           currentUser={props.currentUser}
+
         />
         <div className={classes.dividerContainer}>
           <Divider orientation="vertical" />
@@ -43,6 +44,7 @@ const MeetingsPage = (props) => {
       </Grid>
       <Grid md={9} item className={classes.gridItemContainer}>
         <MeetingsList {...props} cookies={props.cookies} />
+
       </Grid>
       <CreateMeetingModal cssClass={modalClassName} hideModal={hideModal} />
     </Grid>

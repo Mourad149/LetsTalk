@@ -85,6 +85,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     width: '100%',
     overflowX: 'hidden',
+
   },
   bannerText: {
     fontSize: '3rem',

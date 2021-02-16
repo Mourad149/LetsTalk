@@ -36,6 +36,7 @@ function RoutesComponent(props) {
           );
           return <Authenticated {...props} />;
         }}
+
       />
 
       <Route exact path="/signUp">
@@ -43,6 +44,7 @@ function RoutesComponent(props) {
       </Route>
       <Route exact path="/login">
         <LayoutComponent component={<LoginPage cookies={props.cookies} />} />
+
       </Route>
       <Route path="/" exact>
         <LayoutComponent component={<HomePageComponent />} />

@@ -9,6 +9,7 @@ import io from 'socket.io-client';
 function ChatViewComponent(props) {
   const classes = useStyles();
   const [userId, setUserId] = React.useState(props.match.params.userId);
+
   const [userRole, setUserRole] = React.useState('admin');
 
   return (

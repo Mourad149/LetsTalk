@@ -21,6 +21,7 @@ const persistConf = {
 };
 const pReducer = persistReducer(persistConf, store);
 
+
 const theme = createMuiTheme({
   typography: {
     fontFamily: 'Nunito',
@@ -39,6 +40,7 @@ ReactDOM.render(
       </ThemeProvider>
     </CookiesProvider>
     ,
+
   </React.StrictMode>,
   document.getElementById('root')
 );

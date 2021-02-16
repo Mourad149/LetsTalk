@@ -15,4 +15,5 @@ function MessageAvatarComponent(props) {
   );
 }
 
+
 export default MessageAvatarComponent;

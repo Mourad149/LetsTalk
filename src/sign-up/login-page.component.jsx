@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useTransition, animated } from 'react-spring';
 
@@ -5,6 +6,7 @@ import useStyles from './sign-up.style';
 import LoginForm from './login-form.component';
 import Logo from '../assets/sign-up-svg';
 import { Grid, Typography } from '@material-ui/core';
+
 
 const LoginPage = (props) => {
   const classes = useStyles();
@@ -20,6 +22,7 @@ const LoginPage = (props) => {
   const { cookies } = props;
   return transitions.map(({ item, props, key }) => (
     <animated.div style={{ display: 'flex', width: '100%', ...props }}>
+
       <Grid container className={classes.page}>
         <Grid item md={7} className={classes.gridItemContainer}>
           <Typography className={classes.bannerText} align="center" paragraph>
@@ -28,6 +31,7 @@ const LoginPage = (props) => {
         </Grid>
         <Grid item md={5} className={classes.gridItemContainer}>
           <LoginForm cookies={cookies} />
+
         </Grid>
       </Grid>
     </animated.div>

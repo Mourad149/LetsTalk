@@ -60,6 +60,7 @@ const useStyles = makeStyles({
     height: participantAvatarHeight,
   },
 
+
   toastBody: {
     display: 'flex',
     alignItems: 'center',

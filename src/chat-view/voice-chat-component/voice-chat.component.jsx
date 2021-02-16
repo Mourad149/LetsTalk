@@ -10,6 +10,7 @@ import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import { Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { fireNotif } from '../../reducers-actions/notification.action';
+
 let socket = io.connect(
   `https://${process.env.REACT_APP_BASE_URL}:5000/messaging`,
   {
@@ -47,6 +48,7 @@ function VoiceChatComponent(props) {
         ),
         open: true,
       });
+
       navigator.mediaDevices
         .getUserMedia(
           // Only request audio
@@ -84,3 +86,4 @@ function VoiceChatComponent(props) {
   );
 }
 export default connect(null, { fireNotif })(VoiceChatComponent);
+
