@@ -32,7 +32,11 @@ function MessagingComponent(props) {
           cookies={props.cookies}
         />
       ) : (
-        <ParticipantListComponent cookies={props.cookies} />
+        <ParticipantListComponent
+          cookies={props.cookies}
+          userRole={props.userRole}
+          participants={props.participants}
+        />
       )}
     </div>
   );

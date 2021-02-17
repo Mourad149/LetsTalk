@@ -186,9 +186,10 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "space-around",
   },
-  statusIcon: {
+  statusConnectedIcon: {
     color: "#03CA13",
   },
+  statusDisconnectedIcon: { color: "grey" },
   inviteUserIcon: {
     color: "#023e8a",
   },

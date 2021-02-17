@@ -1,33 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
-import 'react-toastify/dist/ReactToastify.css';
-import { Provider } from 'react-redux';
-import store from './reducers/root.reducer';
-import { applyMiddleware, createStore } from 'redux';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { PersistGate } from 'redux-persist/integration/react';
-import { CookiesProvider } from 'react-cookie';
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core";
+import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./reducers/root.reducer";
+import { createStore, applyMiddleware, compose } from "redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { PersistGate } from "redux-persist/integration/react";
+import { CookiesProvider } from "react-cookie";
+import { composeWithDevTools } from "redux-devtools-extension";
 const persistConf = {
-  key: 'root',
+  key: "root",
   storage: storage,
 };
 const pReducer = persistReducer(persistConf, store);
 
-
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Nunito',
+    fontFamily: "Nunito",
   },
 });
-const storeReducer = createStore(pReducer, applyMiddleware(logger, thunk));
+
+const storeReducer = createStore(
+  pReducer,
+  {},
+  composeWithDevTools(applyMiddleware(logger, thunk))
+);
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
@@ -40,9 +44,8 @@ ReactDOM.render(
       </ThemeProvider>
     </CookiesProvider>
     ,
-
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

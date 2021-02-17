@@ -17,10 +17,22 @@ function ParticipantComponent(props) {
       </div>
       <div className={classes.participantActions}>
         <FiberManualRecordIcon
-          className={classes.statusIcon}
+          className={
+            props.connected
+              ? classes.statusConnectedIcon
+              : classes.statusDisconnectedIcon
+          }
           fontSize="small"
         />
-        <AddCircleIcon className={classes.inviteUserIcon} />
+        {props.userRole === "coach" ? (
+          <AddCircleIcon
+            className={
+              props.connected
+                ? classes.inviteUserIcon
+                : classes.statusDisconnectedIcon
+            }
+          />
+        ) : null}
       </div>
     </div>
   );

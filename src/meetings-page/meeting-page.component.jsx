@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import useStyles from './meetings-page.style';
-import ProfileCard from './profile-card.component';
-import MeetingsList from './meetings-list.component';
-import { Grid, Divider } from '@material-ui/core';
-import CreateMeetingModal from './create-meeting-modal.component';
-import { connect } from 'react-redux';
+import useStyles from "./meetings-page.style";
+import ProfileCard from "./profile-card.component";
+import MeetingsList from "./meetings-list.component";
+import { Grid, Divider } from "@material-ui/core";
+import CreateMeetingModal from "./create-meeting-modal.component";
+import { connect } from "react-redux";
 
 const MeetingsPage = (props) => {
   const classes = useStyles();
@@ -36,7 +36,7 @@ const MeetingsPage = (props) => {
           isAdmin={props.match.params.isAdmin}
           showModal={() => showModal()}
           currentUser={props.currentUser}
-
+          cookies={props.cookies}
         />
         <div className={classes.dividerContainer}>
           <Divider orientation="vertical" />
@@ -44,7 +44,6 @@ const MeetingsPage = (props) => {
       </Grid>
       <Grid md={9} item className={classes.gridItemContainer}>
         <MeetingsList {...props} cookies={props.cookies} />
-
       </Grid>
       <CreateMeetingModal cssClass={modalClassName} hideModal={hideModal} />
     </Grid>

@@ -47,11 +47,7 @@ function MessagesComponent(props) {
       console.log(message);
     });
   }, []);
-  React.useEffect(() => {
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+
   const sendMessage = () => {
     socket.emit("sendMessage", {
       message: message,

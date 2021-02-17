@@ -1,28 +1,40 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import useStyles from './meetings-list.style';
-import MeetingCard from './meeting-card.component';
-import SearchBar from './meeting-search.component';
-import { Typography } from '@material-ui/core';
-import { v4 as uuidv4 } from 'uuid';
-import BackdropComponent from '../utils/backdrop.component';
-import { CircularProgress } from '@material-ui/core';
-import { connect } from 'react-redux';
-
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import useStyles from "./meetings-list.style";
+import MeetingCard from "./meeting-card.component";
+import SearchBar from "./meeting-search.component";
+import { Typography } from "@material-ui/core";
+import { v4 as uuidv4 } from "uuid";
+import BackdropComponent from "../utils/backdrop.component";
+import { CircularProgress } from "@material-ui/core";
+import { connect } from "react-redux";
+import { io } from "socket.io-client";
+import { loadConnectionSocket } from "../reducers-actions/current-user.action";
 
 const MeetingsList = (props) => {
   const classes = useStyles();
 
   const [meetings, setMeetings] = useState([]);
   const [usedState, setUsedState] = useState([]);
-  const [searchState, setSearchState] = useState({ searchInput: '' });
+  const [searchState, setSearchState] = useState({ searchInput: "" });
 
   const [filteredMeetings, setFilteredMeetings] = useState([]);
   const [skip, setSkip] = useState(0);
   const [meetingsAreLoading, setMeetingsAreLoading] = useState(true);
+  const [socket, setSocket] = useState();
   const myRef = useRef();
   const { cookies } = props;
+  React.useEffect(() => {
+    // let socket = io.connect(
+    //   `https://${process.env.REACT_APP_BASE_URL}:5000/onConnect`,
+    //   {
+    //     secure: true,
+    //     rejectUnauthorized: false,
+    //     query: `loggedUser=${props.match.params.userId}`,
+    //   }
+    // );
+    // props.loadConnectionSocket(socket);
+  }, [props.match.params.userId]);
 
   const onSearchHandler = (event) => {
     setSearchState({ searchInput: event.target.value });
@@ -49,7 +61,7 @@ const MeetingsList = (props) => {
     axios
       .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${skip}`, {
         headers: {
-          Authorization: `Bearer ${cookies.get('token')}`,
+          Authorization: `Bearer ${cookies.get("token")}`,
         },
       })
       .then((res) => {
@@ -57,25 +69,23 @@ const MeetingsList = (props) => {
 
         setUsedState((prevState) => [...prevState, ...res.data.meetings]);
         setMeetingsAreLoading(false);
-
       })
       .catch((err) => console.log(err));
   }, [skip]);
   useEffect(() => {
-    if (searchState.searchInput !== '') {
+    if (searchState.searchInput !== "") {
       setUsedState([...filteredMeetings]);
     } else {
       axios
         .get(`https://${process.env.REACT_APP_BASE_URL}:5000/meetings/${0}`, {
           headers: {
-            Authorization: `Bearer ${cookies.get('token')}`,
+            Authorization: `Bearer ${cookies.get("token")}`,
           },
         })
         .then((res) => {
           console.log(res);
 
           setUsedState((prevState) => [...res.data.meetings]);
-
         })
         .catch((err) => console.log(err));
     }
@@ -96,7 +106,6 @@ const MeetingsList = (props) => {
               currentUserId={props.currentUserReducer._id}
               index={index + 1}
               {...props}
-
             />
           );
         });
@@ -112,7 +121,6 @@ const MeetingsList = (props) => {
       }
     });
   }, [usedState]);
-
 
   return (
     <div className={classes.meetingsList} onScroll={onScroll} ref={myRef}>
@@ -139,4 +147,3 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps)(MeetingsList);
-

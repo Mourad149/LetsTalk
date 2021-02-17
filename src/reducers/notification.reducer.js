@@ -4,17 +4,13 @@ const initialState = {
 };
 
 export const notifReducer = (state = initialState, action) => {
-  let updatedState = { ...state };
-
   switch (action.type) {
-    case 'FIRE-NOTIF':
+    case "FIRE-NOTIF":
+      let updatedState = state;
+
       updatedState.open = action.payload.open;
       updatedState.component = action.payload.component;
-      return { ...updatedState };
-      break;
-    case 'CLOSE-NOTIF':
-      updatedState.open = action.payload.open;
-      return { ...updatedState };
+      return updatedState;
       break;
 
     default:
