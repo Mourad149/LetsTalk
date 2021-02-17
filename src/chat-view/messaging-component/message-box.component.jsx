@@ -28,7 +28,7 @@ function MessageBoxComponent(props) {
             : classes.userNameLeftStyle
         }
       >
-        Mourad Zinbi
+        {props.senderName}
       </Typography>
       {props.hasRaisedHandComponent ? (
         [

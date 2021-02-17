@@ -8,7 +8,6 @@ import { Typography } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import BackdropComponent from '../utils/backdrop.component';
 import { CircularProgress } from '@material-ui/core';
-<<<<<< ReducerSetup
 import { connect } from 'react-redux';
 
 

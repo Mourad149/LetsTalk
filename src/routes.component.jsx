@@ -1,14 +1,14 @@
-import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import ChatViewComponent from './chat-view/chat-view.component';
-import MeetingPage from './meetings-page/meeting-page.component';
-import SignUpPage from './sign-up/sign-up-page.component';
-import LoginPage from './sign-up/login-page.component';
-import LayoutComponent from './layout/layout.component';
-import HomePageComponent from './home-page/home-page.component';
-import AlertComponent from './utils/alert.component';
-import { withCookies } from 'react-cookie';
-import withAuth from './utils/withAuth';
+import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import ChatViewComponent from "./chat-view/chat-view.component";
+import MeetingPage from "./meetings-page/meeting-page.component";
+import SignUpPage from "./sign-up/sign-up-page.component";
+import LoginPage from "./sign-up/login-page.component";
+import LayoutComponent from "./layout/layout.component";
+import HomePageComponent from "./home-page/home-page.component";
+import AlertComponent from "./utils/alert.component";
+import { withCookies } from "react-cookie";
+import withAuth from "./utils/withAuth";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,11 +32,10 @@ function RoutesComponent(props) {
         render={(injectedProps) => {
           const Authenticated = withAuth(
             () => <MeetingPage {...injectedProps} cookies={props.cookies} />,
-            props.cookies.get('token')
+            props.cookies.get("token")
           );
           return <Authenticated {...props} />;
         }}
-
       />
 
       <Route exact path="/signUp">
@@ -44,7 +43,6 @@ function RoutesComponent(props) {
       </Route>
       <Route exact path="/login">
         <LayoutComponent component={<LoginPage cookies={props.cookies} />} />
-
       </Route>
       <Route path="/" exact>
         <LayoutComponent component={<HomePageComponent />} />
